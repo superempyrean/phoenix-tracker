@@ -1,6 +1,6 @@
 # Drawable resources (name, qualifiers, type) in the base APK. Type is the root element of an XML
 # drawable, or the file's format. Source: resources.arsc and each file's binary XML. Status: extracted.
-# 862 entries, 860 names, 286 named ic_mana_*.
+# 866 entries, 864 names, 286 named ic_mana_*.
 $avd_hide_password__0	-	vector
 $avd_hide_password__1	-	objectAnimator
 $avd_hide_password__2	-	objectAnimator
@@ -156,6 +156,8 @@ checkpoint_power_end	-	vector
 checkpoint_power_mid	-	vector
 checkpoint_power_start	-	vector
 checkpoint_stroke	-	shape
+design_components_slider_native_images_sliderthumbdark	mdpi	png
+design_components_slider_native_images_sliderthumblight	mdpi	png
 design_fab_background	-	shape
 design_ic_visibility	-	vector
 design_ic_visibility_off	-	vector
@@ -818,6 +820,7 @@ rn_gifting_blocked_dark	-	reference
 rn_gifting_blocked_light	-	reference
 rn_ic_check_24px	-	reference
 rn_img_discord_nitro_logo_left	-	reference
+rn_notif_preview_voice	-	reference
 rn_nuf_add	-	reference
 rn_platform_img_bungie_dark	nodpi	reference
 rn_platform_img_bungie_white	-	reference
@@ -830,6 +833,7 @@ rn_premium_img_wumpus_nitro	-	reference
 rn_scrollbar_thumb	-	shape
 round_button	-	shape
 rounded_pill_background	-	shape
+splash_dark	-	layer-list
 splash_light	-	layer-list
 splash_logo	v31	inset
 tenure_badge_bronze_small	xxhdpi	png

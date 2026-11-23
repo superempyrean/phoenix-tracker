@@ -421,6 +421,7 @@
 1581	HostRules.shareExtension
 1586	HostRules.decodeThreads
 1634	HostRules.signInRequired
+1639	Updates.verify
 1681	CrashReporter.setUser
 1686	CrashReports.reportStall
 1687	HostRules.lottieEdits
@@ -448,6 +449,7 @@
 2141	Linking.openNotificationSettings
 2160	Browser.closeAuthSession
 2165	UserActivity.resign
+2167	Updates.rootPath
 2171	Ota.keepManifestEtag
 2175	Perf.crashReports
 2183	RnStrings.packLocale
@@ -511,4 +513,5 @@
 3401	UserActivity.set
 3415	MediaTranscoder.imageQuality
 3459	UserActivity
+3462	Ota.verify
 3517	CrashReporter.firstFrameMissed

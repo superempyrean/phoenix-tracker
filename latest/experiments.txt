@@ -2,7 +2,7 @@
 2025-04-desktop-refresh-fast-follows	host
 2025-04-native-markdown	bundle,host
 2025-05-search-results-feedback	bundle,host
-2025-08-animated-keyboard-android	bundle,host
+2025-08-animated-keyboard-android	bundle
 2025-08-browser-hevc	bundle
 2025-08-voice-user-affinity	bundle,host
 2025-09-image-attachment-mezzanine-v2	bundle
@@ -33,7 +33,7 @@
 2025-12-proportional-vad-indicator	bundle,host
 2025-12-quest-cta-refactor-rollout	host
 2025-12-shadow-node-spike	bundle
-2025-12-windows-audio-effects	bundle
+2025-12-windows-audio-effects	bundle,host
 2025-12-wmf-gpu-encode	bundle,host
 2025-12-zoomed-analytics	bundle,host
 2026-01-android-rmle	bundle,dex
