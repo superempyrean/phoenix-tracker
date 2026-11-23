@@ -1,0 +1,25 @@
+# Discord binaries and raw dumps never go in this repository.
+*.apk
+*.apks
+*.xapk
+*.aab
+*.so
+*.so.*
+*.dex
+*.bundle
+*.hbc
+*.cwasm
+*.wasm
+*.zip
+*.jar
+*.i64
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+*.bin
+*.dump
+
+__pycache__/
+*.pyc
