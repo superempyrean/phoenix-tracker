@@ -11,7 +11,7 @@ tables. Every ABI that ships the host agrees; armeabi-v7a has no cache
 tables (see the README). 357200 adds four drawables (862 to 866 entries)
 and no `ic_mana_*` icon (286 in both). The platform reads 399 of 855
 PropIds in 356207 and 404 of 871 in 357200; of the 16 new PropIds it
-reads 5, and `selectionColor` gained a Number handler.
+reads 4, and `selectionColor` gained a Number handler.
 
 ```
 drawables.tsv
