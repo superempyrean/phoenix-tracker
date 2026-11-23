@@ -25,7 +25,7 @@ value-tag	9	Vec4F32	spec	code: the platform value decoder's switch; name: manual
 value-tag	10	MapStringValue	spec	code: the platform value decoder's switch; name: manual
 value-tag	11	Words	spec	code: the platform value decoder's switch; name: manual
 value-tag	12	WordsPatch	spec	code: the platform value decoder's switch; name: manual
-propid-count	855	-	extracted	the host's PropId table and the platform's name array
+propid-count	871	-	extracted	the host's PropId table and the platform's name array
 frame-header-size	16	-	extracted	the platform's invoke compares the frame length with 16
 frame-kind	1	CALL	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual
 frame-kind	2	REPLY	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual

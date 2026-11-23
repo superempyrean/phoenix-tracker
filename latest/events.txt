@@ -104,6 +104,7 @@
 2506	@prefersCrossFade
 2507	@rtcRegionLatency
 2872	@exportProgress
+3002	@appIconCurrent
 3114	@announcementFinished
 3231	@storekitTransactionUpdated
 3272	@navBar
