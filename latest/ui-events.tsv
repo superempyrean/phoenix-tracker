@@ -1,0 +1,9 @@
+# UI event names (spec) and their PropIds (extracted), as a node lists them in `on`.
+102	blur
+496	tap
+575	change
+584	focus
+595	layout
+614	press
+628	submit
+642	longPress

@@ -1,0 +1,9 @@
+# Emoji: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+id
+name
+animated
+available
+version
+roles
+managed

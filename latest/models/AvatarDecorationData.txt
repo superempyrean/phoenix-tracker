@@ -1,0 +1,5 @@
+# AvatarDecorationData: fields, sorted, from the smallest Deserialize visitor naming asset, expires_at, sku_id.
+# Status: extracted (anchored by those fields).
+asset
+expires_at
+sku_id

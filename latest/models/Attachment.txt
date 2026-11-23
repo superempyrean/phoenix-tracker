@@ -1,0 +1,28 @@
+# Attachment: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+id
+flags
+description
+title
+duration_secs
+waveform
+placeholder
+filename
+size
+url
+proxy_url
+content_type
+width
+height
+placeholder_version
+original_content_type
+ephemeral
+content_scan_version
+clip_created_at
+clip_participants
+application
+clip_events_timeline
+clip_remote_id
+clip_sync_timestamp
+spritesheet_vtt_url
+spritesheet_image_url

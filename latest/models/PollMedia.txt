@@ -1,0 +1,5 @@
+# PollMedia: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+text
+emoji
+attachment_ids

@@ -1,0 +1,5 @@
+# MemberRoles: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+color_role
+highest_role
+icon_role

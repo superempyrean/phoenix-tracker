@@ -1,0 +1,5 @@
+# EmbedFooter: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+text
+icon_url
+proxy_icon_url

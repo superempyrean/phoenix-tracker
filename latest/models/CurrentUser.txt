@@ -1,0 +1,22 @@
+# CurrentUser: fields, sorted, from the smallest Deserialize visitor naming email, mfa_enabled, purchased_flags.
+# Status: extracted (anchored by those fields).
+age_verification_status
+authenticator_types
+desktop
+email
+flags
+has_bounced_email
+locale
+mfa_enabled
+mobile
+nsfw_allowed
+perks
+personal_connection_id
+phone
+premium_state
+premium_type
+purchased_flags
+restricted_schedule
+store_country
+typing_indicator_style
+verified

@@ -1,0 +1,24 @@
+# Member: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+user
+user_id
+nick
+avatar
+roles
+joined_at
+premium_since
+deaf
+mute
+pending
+communication_disabled_until
+flags
+guild_id
+banner
+avatar_decoration_data
+collectibles
+display_name_styles
+unusual_dm_activity_until
+member_gaming_leaderboard_data
+derived_roles
+arrival
+record_avatar

@@ -1,0 +1,5 @@
+# EmbedField: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+name
+value
+inline

@@ -1,0 +1,5 @@
+# RoleColors: fields, sorted, from the smallest Deserialize visitor naming primary_color, secondary_color, tertiary_color.
+# Status: extracted (anchored by those fields).
+primary_color
+secondary_color
+tertiary_color

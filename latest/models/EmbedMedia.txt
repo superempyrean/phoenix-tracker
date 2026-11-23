@@ -1,0 +1,11 @@
+# EmbedMedia: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+url
+proxy_url
+width
+height
+placeholder
+placeholder_version
+description
+flags
+content_type
