@@ -2,6 +2,45 @@
 
 Each entry is `python -I extract/diff.py <previous build> <this build>`.
 
+## extractor: gateway, reducers, cache tables, drawables, prop types
+
+Five new tables, written for 357200 and checked against 356207 with the
+same extractor. On both builds the host registers 89 gateway events and
+86 reducers in 32 domains, in the same order, and its cache store has 23
+tables. Every ABI that ships the host agrees; armeabi-v7a has no cache
+tables (see the README). 357200 adds four drawables (862 to 866 entries)
+and no `ic_mana_*` icon (286 in both). The platform reads 399 of 855
+PropIds in 356207 and 404 of 871 in 357200; of the 16 new PropIds it
+reads 5, and `selectionColor` gained a Number handler.
+
+```
+drawables.tsv
+  added    design_components_slider_native_images_sliderthumbdark	mdpi	png
+  added    design_components_slider_native_images_sliderthumblight	mdpi	png
+  added    rn_notif_preview_voice	-	reference
+  added    splash_dark	-	layer-list
+
+propid-types.tsv
+  added    855	measureFontPadding	Bool	lh.a
+  added    856	topBarShown	Number	lh.a
+  added    857	expandedRest	-	unread
+  added    858	scrollOffsetLayout	Bool	lh.a
+  added    859	roundEachLine	-	unread
+  added    860	sheetKeyboardCovers	-	unread
+  added    861	firstTop	-	unread
+  added    862	user	-	unread
+  added    863	closeAtOnce	-	unread
+  added    864	borderCurve	-	unread
+  added    865	openSpring	-	unread
+  added    866	below	key:Double	n7.i
+  added    867	linkLongPressEnd	-	unread
+  added    868	sheetOpenAtLayout	-	unread
+  added    869	drawLineHeight	-	unread
+  added    870	uiFontMetrics	-	unread
+  changed  844	selectionColor	- -> Number
+  342 props read by other classes (jadx names; usually renaming)
+```
+
 ## android 357200
 
 357.0 - Alpha, libdiscord unchanged. The wire format, kinds, models and

@@ -7,11 +7,14 @@ bytes; nothing from them is executed or written to disk except the tables.
 """
 
 import argparse
+import array
 import hashlib
 import os
 import re
 import shutil
+import struct
 import sys
+import tempfile
 import time
 import zipfile
 
@@ -22,7 +25,9 @@ import axml  # noqa: E402
 import dex  # noqa: E402
 import elf  # noqa: E402
 import hermes  # noqa: E402
+import jprops  # noqa: E402
 import literals  # noqa: E402
+import res  # noqa: E402
 
 HOST = "liblibdiscord_wasm_host.so"
 ABIS = ["arm64-v8a", "armeabi-v7a", "x86", "x86_64"]
@@ -146,6 +151,48 @@ def platform_tables(base):
     return found
 
 
+def drawable_table(base):
+    """drawables.tsv: every drawable resource in resources.arsc, with its
+    qualifiers and what it is."""
+    rows = []
+    mismatch = 0
+    for _tname, name, quals, value in res.entries(base.zip.read("resources.arsc"), "drawable"):
+        if isinstance(value, str):
+            path = value
+            # aapt2 names the directory after the configuration, plus the
+            # platform version a qualifier implies (-v4 for a density).
+            folder = path.split("/")[1] if path.count("/") == 2 else ""
+            if folder.startswith("drawable") and NO_VERSION.sub("", folder[len("drawable") + 1:])                     != NO_VERSION.sub("", quals):
+                mismatch += 1
+            low = path.lower()
+            if low.endswith(".9.png"):
+                kind = "nine-patch"
+            elif low.endswith(".xml"):
+                try:
+                    kind = next(axml.elements(base.zip.read(path)))[0]
+                except (KeyError, ValueError, StopIteration, IndexError, struct.error):
+                    kind = "xml?"
+            else:
+                kind = low.rsplit(".", 1)[-1] if "." in low.rsplit("/", 1)[-1] else "file"
+        elif value[0] == "ref":
+            kind = "reference"
+        elif value[0] == "bag":
+            kind = "bag"
+        else:
+            kind = "color" if 0x1C <= value[1] <= 0x1F else f"value-type-{value[1]:#x}"
+        rows.append((name, quals or "-", kind))
+    if mismatch:
+        warn(f"{mismatch} drawable paths name a directory other than their configuration")
+    rows.sort()
+    names = {r[0] for r in rows}
+    mana = sum(1 for n in names if n.startswith("ic_mana_"))
+    return Table(
+        ["Drawable resources (name, qualifiers, type) in the base APK. Type is the root element of an XML",
+         "drawable, or the file's format. Source: resources.arsc and each file's binary XML. Status: extracted.",
+         f"{len(rows)} entries, {len(names)} names, {mana} named ic_mana_*."],
+        [f"{n}\t{q}\t{k}" for n, q, k in rows])
+
+
 def hermes_strings(base):
     if "assets/index.android.bundle" not in base.names:
         return None, []
@@ -215,10 +262,198 @@ def slice_array(e, start_name, n):
                 yield got
 
 
+GATEWAY_NAME = re.compile(r"[A-Z][A-Z0-9_]*")
+IDENT = re.compile(rb"[a-z][a-z0-9_]*")
+NO_VERSION = re.compile(r"-?v\d+$")
+
+
+def _gateway_entry(e, va):
+    """(name, handler) if `va` holds a {name ptr, name len, handler} entry:
+    an upper-case event name in .rodata and a handler in .text."""
+    w = e.word
+    rel = e.relative_relocs()
+    ptr = rel.get(va)
+    n = e.word_at(va + w)
+    if ptr is None or n is None or not 1 <= n <= 64 or not e.section(".rodata").contains(ptr):
+        return None
+    raw = e.read(ptr, n)
+    if raw is None or not GATEWAY_NAME.fullmatch(raw.decode("ascii", "replace")):
+        return None
+    handler = e.pointer_at(va + 2 * w)
+    if handler is None or not e.section(".text").contains(handler):
+        return None
+    return raw.decode(), handler
+
+
+def gateway_registry(e, seed):
+    """The {name, len, handler} array holding the entry named `seed`, walked
+    both ways from it until an entry stops looking like one. Returns
+    (start address, [names]) or None. Several arrays holding the seed is an
+    error: the caller can't tell which is the registry."""
+    w = e.word
+    rel = e.relative_relocs()
+    want = seed.encode()
+    seeds = sorted(va for va, t in rel.items()
+                   if e.word_at(va + w) == len(want) and e.read(t, len(want)) == want
+                   and _gateway_entry(e, va) is not None)
+    if len(seeds) != 1:
+        if seeds:
+            warn(f"{e.abi}: {len(seeds)} gateway tables hold {seed}")
+        return None
+    first = seeds[0]
+    while _gateway_entry(e, first - 3 * w) is not None:
+        first -= 3 * w
+    names, va = [], first
+    while (x := _gateway_entry(e, va)) is not None:
+        names.append(x[0])
+        va += 3 * w
+    return first, names
+
+
+def gateway_tables(e, tables):
+    """gateway-events.txt and reducers.tsv."""
+    reg = gateway_registry(e, "MESSAGE_CREATE")
+    if reg is None:
+        warn(f"{e.abi}: gateway registry not found")
+    else:
+        tables["gateway-events.txt"] = Table(
+            ["Gateway dispatch events the host registers a handler for, in registry order (index, name).",
+             "Source: the host's {name ptr, name len, handler} array, found from its MESSAGE_CREATE entry and",
+             "walked both ways while entries hold an upper-case name and a .text handler. Status: extracted."],
+            [f"{i}\t{n}" for i, n in enumerate(reg[1])])
+
+    # LIBDISCORD_REDUCERS_TABLE is a &[(&str domain, &[entry])]; each domain's
+    # entries have the registry's shape and sit back to back.
+    sym = e.symbol("LIBDISCORD_REDUCERS_TABLE")
+    if sym is None:
+        warn(f"{e.abi}: LIBDISCORD_REDUCERS_TABLE not exported")
+        return
+    w = e.word
+    base, count = e.pointer_at(sym[0]), e.word_at(sym[0] + w)
+    rows, slices = [], []
+    for k in range(count or 0):
+        rec = base + 4 * w * k
+        domain = _slice(e, e.relative_relocs(), rec, e.section(".rodata"))
+        ptr, n = e.pointer_at(rec + 2 * w), e.word_at(rec + 3 * w)
+        if domain is None or ptr is None or n is None or n > 1024:
+            warn(f"{e.abi}: reducer domain {k} doesn't read as (&str, &[entry])")
+            return
+        slices.append((ptr, n))
+        for j in range(n):
+            x = _gateway_entry(e, ptr + 3 * w * j)
+            if x is None:
+                warn(f"{e.abi}: reducer {domain}[{j}] doesn't read as an entry")
+                return
+            rows.append(f"{domain}\t{x[0]}")
+    # The same entries, found the other way: walked from READY_SUPPLEMENTAL.
+    walk = gateway_registry(e, "READY_SUPPLEMENTAL")
+    contiguous = all(slices[i][0] + 3 * w * slices[i][1] == slices[i + 1][0] for i in range(len(slices) - 1))
+    agrees = (walk is not None and contiguous and slices and walk[0] == slices[0][0]
+              and walk[1] == [r.split("\t")[1] for r in rows])
+    print(f"check: {'ok  ' if agrees else 'FAIL'} {e.abi}: the walk from READY_SUPPLEMENTAL equals the "
+          f"{len(slices)} reducer domains' entries ({len(rows)})", file=sys.stderr)
+    if not agrees:
+        warn(f"check failed: {e.abi}: reducer walk and LIBDISCORD_REDUCERS_TABLE disagree")
+    tables["reducers.tsv"] = Table(
+        ["Per-domain gateway reducers (domain, event), in table order.",
+         "Source: the exported LIBDISCORD_REDUCERS_TABLE, a slice of (&str domain, &[{name ptr, name len, handler}]).",
+         "Checked against the same entries walked from READY_SUPPLEMENTAL. Status: extracted."],
+        rows)
+
+
+def enum_name_table(e, seed):
+    """The names of a field-less enum whose `as_str` the compiler lowered to
+    a name table and a length table, found from one variant name, `seed`.
+    The 64-bit hosts hold the names as i32 offsets relative to the offset
+    table's start, and the lengths as a separate array of words in
+    .rodata. Returns the names in variant order, or None. Most names are
+    packed back to back in .rodata, which is what tells the right length
+    table from a shifted one."""
+    ro = e.section(".rodata")
+    d = e.data[ro.offset:ro.offset + ro.size]
+    hits = set()
+    i = d.find(seed)
+    while i >= 0:
+        hits.add(ro.addr + i)
+        i = d.find(seed, i + 1)
+    if not hits:
+        return None
+    w = e.word
+
+    # (j, target(m)): entry j of the name table points at the seed.
+    cands = []
+    offs = array.array("i")
+    offs.frombytes(d[:len(d) // 4 * 4])
+    for k in range(len(offs)):
+        j4 = ro.addr + 4 * k + offs[k]
+        for g in hits:
+            j4g = j4 - g
+            if 0 <= j4g < 256 and j4g % 4 == 0:
+                start = k - j4g // 4
+                cands.append((j4g // 4, lambda m, s=start: ro.addr + 4 * s + offs[s + m]
+                              if s + m < len(offs) else None))
+    words = array.array("Q" if w == 8 else "I")
+    words.frombytes(d[:len(d) // w * w])
+    at_len = [x for x, v in enumerate(words) if v == len(seed)]
+    best = None
+    for j, target in cands:
+        for x in at_len:
+            base = x - j
+            if base < 0 or not all(1 <= words[base + q] <= 64 for q in range(j)):
+                continue
+            names, adjacent, prev_end = [], 0, None
+            for m in range(256):
+                if base + m >= len(words):
+                    break
+                n, t = words[base + m], target(m)
+                if t is None or not 1 <= n <= 64 or not ro.contains(t):
+                    break
+                raw = d[t - ro.addr:t - ro.addr + n]
+                if not IDENT.fullmatch(raw):
+                    break
+                adjacent += prev_end == t
+                names.append(raw.decode())
+                prev_end = t + n
+            if len(names) <= j:
+                continue
+            # The real pair packs most names back to back; a wrong length
+            # table cuts names at arbitrary points. Of two starts with the
+            # same packing, the later one leaves out a stray name before it.
+            score = (adjacent * 2 >= len(names) - 1, adjacent, -len(names))
+            if best is None or score > best[0]:
+                best = (score, names)
+    if best is None or not best[0][0]:
+        return None
+    return best[1]
+
+
+def cache_tables(e, tables, notes):
+    if not e.is64:
+        # 32-bit ARM keeps the names as a pointer array in .data.rel.ro, and
+        # the pointer and length arrays of another enum end right before
+        # this one's, so where it starts can't be read from the data alone.
+        notes["no_cache_tables"] = "the table's start is ambiguous on 32-bit"
+        return
+    names = enum_name_table(e, b"guild_versions")
+    if names is None:
+        warn(f"{e.abi}: cache store table enum not found")
+        return
+    meta = b"cache_tables" in e.data and b"cache_version" in e.data
+    tables["cache-tables.txt"] = Table(
+        ["The host's cache store tables, in enum order (index, name).",
+         "Source: the store's table enum, read from its name table (i32 offsets and integer lengths in .rodata),",
+         "found from the variant guild_versions; not a string scan. The store's meta record keeps them under"
+         " the keys cache_version and cache_tables" + ("" if meta else " (keys not found in this build)") + ".",
+         "Status: extracted."],
+        [f"{i}\t{n}" for i, n in enumerate(names)])
+
+
 def host_tables(e, tables, notes):
     """Fills `tables` with what the host .so yields on this ABI."""
     data = e.data
     keyed = keyed_tables(e)
+    gateway_tables(e, tables)
+    cache_tables(e, tables, notes)
 
     # PropIds: the sorted name->id table whose ids are exactly 0..n-1.
     props = None
@@ -453,6 +688,33 @@ def wire_table(p, host_data, props):
         rows)
 
 
+def propid_types(args, base, props):
+    work = None
+    try:
+        if args.jadx:
+            work = tempfile.mkdtemp(prefix="jadx-")
+            sources = jprops.run_jadx(args.jadx, base.path, work)
+        else:
+            sources = args.jadx_sources
+        read, keyed, by_id = jprops.read_props(jprops.Source(sources), props)
+    finally:
+        if work:
+            shutil.rmtree(work, ignore_errors=True)
+    lines = jprops.table_lines(props, read, keyed, by_id)
+    unread = sum(1 for x in lines if x.endswith("\tunread"))
+    return Table(
+        ["PropId, name, the type the Android platform reads, and the classes that read it (jadx names).",
+         "Bool, Number (I32/I64/F64), String, Map (tag 8 or 10), List (tag 7 or 9), Edges (Vec4F32 or a list),",
+         "Slot (the handler reads the stored slot itself) and Any are the platform's prop handlers, by the",
+         "wrapper class its dispatch loop picks an accessor for. key:<type> is a read of the name as a key of",
+         "a nested object (spans, forceValue, motion specs): tag 8 objects use PropIds as keys too. by-id is a",
+         "lookup through the name->id map with no typed accessor. unread: no handler, key read or lookup;",
+         "UI event names (press) are strings inside `on` and show as unread.",
+         "Source: jadx's Java output of classes*.dex. Status: extracted.",
+         f"{len(lines) - unread} of {len(lines)} read on Android."],
+        lines)
+
+
 # --------------------------------------------------------------------- main
 
 def write_tree(out, shared, per_abi):
@@ -484,6 +746,12 @@ def main():
     ap.add_argument("--out", default="latest")
     ap.add_argument("--allow-abi-differences", action="store_true",
                     help="exit 0 even if a vocabulary table differs between ABIs")
+    jx = ap.add_mutually_exclusive_group()
+    jx.add_argument("--jadx", metavar="HOME",
+                    help="jadx install (HOME/lib/*.jar): decompile the base APK's dex for propid-types.tsv")
+    jx.add_argument("--jadx-sources", metavar="DIR",
+                    help="an existing jadx output (its sources directory, made with --no-replace-consts"
+                         " --show-bad-code) to read propid-types.tsv from")
     args = ap.parse_args()
     t0 = time.time()
 
@@ -516,6 +784,10 @@ def main():
     hv, hstrings = hermes_strings(base)
     if hv is not None:
         build.append(f"hermes-bytecode-version\t{hv}")
+    if "resources.arsc" in base.names:
+        shared["drawables.tsv"] = drawable_table(base)
+    else:
+        warn("the base APK has no resources.arsc")
     if p["kinds"] is None:
         warn("kind table not found in the platform")
     else:
@@ -559,6 +831,8 @@ def main():
         notes_by_abi[abi] = notes
         if "no_code" in notes:
             print(f"note: {abi}: models skipped ({notes['no_code']})", file=sys.stderr)
+        if "no_cache_tables" in notes:
+            print(f"note: {abi}: cache tables skipped ({notes['no_cache_tables']})", file=sys.stderr)
     if not results:
         warn("no ABI split carries the host")
 
@@ -607,6 +881,11 @@ def main():
         shared["ui-events.tsv"] = Table(
             ["UI event names (spec) and their PropIds (extracted), as a node lists them in `on`."],
             [f"{pid[n]}\t{n}" if n in pid else f"?\t{n}" for n in sorted(UI_EVENT_NAMES, key=lambda n: pid.get(n, 1 << 20))])
+
+    if props is not None and (args.jadx or args.jadx_sources):
+        shared["propid-types.tsv"] = propid_types(args, base, props)
+    elif props is not None:
+        print("note: propid-types.tsv skipped (pass --jadx or --jadx-sources)", file=sys.stderr)
 
     exps = {}
     hexps = {abi: n["host_experiments"] for abi, n in notes_by_abi.items() if "host_experiments" in n}

@@ -13,10 +13,11 @@ import subprocess
 import sys
 
 # Tables of "id<TAB>name" lines, diffed by name and by id.
-ID_TABLES = {"propids.tsv", "host-calls.txt", "events.txt", "atoms.tsv", "kinds.txt", "ui-events.tsv"}
+ID_TABLES = {"propids.tsv", "host-calls.txt", "events.txt", "atoms.tsv", "kinds.txt", "ui-events.tsv",
+             "cache-tables.txt"}
 # Tables whose ids other code depends on: a changed id is called out.
 RENUMBER_WARN = {"propids.tsv": "PropId", "host-calls.txt": "method id", "events.txt": "event id",
-                 "atoms.tsv": "id", "kinds.txt": "kind index"}
+                 "atoms.tsv": "id", "kinds.txt": "kind index", "cache-tables.txt": "table index"}
 
 
 def lines(text):
@@ -104,6 +105,42 @@ def diff_keyed(old, new, width):
     return out
 
 
+def diff_ordered(old, new):
+    """An "index<TAB>name" list whose order is the build's, not an id:
+    names added and removed, and how many kept names moved."""
+    o = [x.split("\t", 1)[1] for x in old]
+    n = [x.split("\t", 1)[1] for x in new]
+    os_, ns = set(o), set(n)
+    out = [f"  added    {x}" for x in new if x.split("\t", 1)[1] not in os_]
+    out += [f"  removed  {x}" for x in old if x.split("\t", 1)[1] not in ns]
+    kept_o = [x for x in o if x in ns]
+    kept_n = [x for x in n if x in os_]
+    moved = sum(1 for a, b in zip(kept_o, kept_n) if a != b)
+    if moved:
+        out.append(f"  reordered: {moved} of {len(kept_n)} kept entries changed position")
+    return out
+
+
+def diff_types(old, new):
+    """propid-types.tsv: a changed type per PropId, and only a count for
+    changes in the reading classes, whose names are minified."""
+    def parse(ls):
+        return {tuple(x.split("\t")[:2]): x for x in ls}
+    o, n = parse(old), parse(new)
+
+    def kind(line):
+        return line.split("\t")[2]
+
+    out = [f"  added    {n[k]}" for k in n if k not in o]
+    out += [f"  removed  {o[k]}" for k in o if k not in n]
+    out += [f"  changed  {k[0]}\t{k[1]}\t{kind(o[k])} -> {kind(n[k])}"
+            for k in o if k in n and kind(o[k]) != kind(n[k])]
+    where = sum(1 for k in o if k in n and kind(o[k]) == kind(n[k]) and o[k] != n[k])
+    if where:
+        out.append(f"  {where} props read by other classes (jadx names; usually renaming)")
+    return out
+
+
 def diff_trees(old, new):
     report = []
     for name in sorted(set(old) | set(new)):
@@ -121,6 +158,12 @@ def diff_trees(old, new):
             out = diff_ids(base, a, b)
         elif base == "wire.txt":
             out = diff_keyed(a, b, 2)
+        elif base == "gateway-events.txt":
+            out = diff_ordered(a, b)
+        elif base == "drawables.tsv":
+            out = diff_keyed(a, b, 2)
+        elif base == "propid-types.tsv":
+            out = diff_types(a, b)
         elif base in ("libs.tsv", "build.txt"):
             out = diff_keyed(a, b, 1 if base == "libs.tsv" else 2)
         else:

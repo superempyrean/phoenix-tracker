@@ -1,0 +1,27 @@
+# The host's cache store tables, in enum order (index, name).
+# Source: the store's table enum, read from its name table (i32 offsets and integer lengths in .rodata),
+# found from the variant guild_versions; not a string scan. The store's meta record keeps them under the keys cache_version and cache_tables.
+# Status: extracted.
+0	meta
+1	guilds
+2	guild_versions
+3	channels
+4	channel_stubs
+5	channel_overwrites
+6	channel_topics
+7	channel_access
+8	channel_hashes
+9	messages
+10	read_states
+11	user_guild_settings
+12	user_settings_proto
+13	guild_emojis
+14	guild_stickers
+15	non_guild_versions
+16	users
+17	members
+18	relationships
+19	message_channels
+20	prefs
+21	drafts
+22	analytics

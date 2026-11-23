@@ -114,6 +114,31 @@ class Elf:
                 out.append((n, kind, shndx != 0))
         return out
 
+    def symbol(self, wanted):
+        """(value, size) of the defined .dynsym entry named `wanted`, or None."""
+        for s in self.sections:
+            if s.type != SHT_DYNSYM:
+                continue
+            strsec = self.sections[s.link]
+            ent = 24 if self.is64 else 16
+            key = wanted.encode() + b"\0"
+            for j in range(1, s.size // ent):
+                o = s.offset + j * ent
+                if self.is64:
+                    name, _info, _other, shndx, value, size = struct.unpack_from("<IBBHQQ", self.data, o)
+                else:
+                    name, value, size, _info, _other, shndx = struct.unpack_from("<IIIBBH", self.data, o)
+                p = strsec.offset + name
+                if shndx != 0 and self.data[p:p + len(key)] == key:
+                    return value, size
+        return None
+
+    def pointer_at(self, va):
+        """The pointer stored at `va` once the loader has relocated it: the
+        target of a relative relocation there, else the word itself."""
+        rel = self.relative_relocs()
+        return rel[va] if va in rel else self.word_at(va)
+
     def relative_relocs(self):
         """{place: target} for every R_*_RELATIVE relocation."""
         if self._relative is not None:

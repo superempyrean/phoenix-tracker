@@ -33,6 +33,11 @@ build, check out its tag or run `git show android-356207:latest/propids.tsv`.
 | `experiments.txt` | date-prefixed experiment names, and whether the host, the Hermes bundle or the dex names them |
 | `guest-modules.txt` | the `wasm-app*` feature crates |
 | `first-party-crates.txt` | every `crates/<name>` the host's source paths name |
+| `gateway-events.txt` | the gateway dispatch events the host registers a handler for, in registry order |
+| `reducers.tsv` | the per-domain gateway reducers behind `LIBDISCORD_REDUCERS_TABLE`: domain and event |
+| `cache-tables.txt` | the tables of the host's cache store, in enum order |
+| `drawables.tsv` | every drawable resource in the base APK: name, qualifiers and type, with the `ic_mana_*` count |
+| `propid-types.tsv` | each PropId with the type the Android platform reads it as, and the classes that read it |
 | `abi/<abi>/libs.tsv` | native libraries in the split: name, size, sha256 |
 | `abi/<abi>/rustc.txt` | each library's `.comment` lines, `/rustc/<commit>/` paths and toolchain paths |
 | `abi/<abi>/crates.txt` | vendored crates as `name@version`, from the host's source paths |
@@ -69,7 +74,14 @@ python -I extract/extract.py \
 ```
 
 It reads the APKs as zip files, parses their members as bytes and never
-runs anything from them, so keep `-I`. It replaces everything in `--out`.
+runs anything from them, so keep `-I`. The one exception is
+`propid-types.tsv`, which needs Java. `--jadx` names a jadx install
+(`lib/*.jar`); the extractor copies the base APK's dex to a temporary
+directory and runs jadx's command-line entry point on it
+(`java -cp ... jadx.cli.JadxCLI --no-res --no-replace-consts --show-bad-code`),
+never the GUI. That adds about a minute and a half. `--jadx-sources`
+reuses an earlier jadx output made with the same flags. Without either
+option the table is skipped, and `diff.py` reports it as removed. It replaces everything in `--out`.
 A run over the five APKs of 356207 takes about 16 seconds, most of it in
 reading code literals out of the two 64-bit hosts. The output is
 deterministic. Never commit an APK, a `.so`, a dex or a bundle;
@@ -136,6 +148,33 @@ How the other tables are found, briefly:
   renames an anchor field, the model goes missing with a warning.
 - Experiments: `&str` slices in the host's data, and strings in the Hermes
   bundle and the dex, matching a `YYYY-MM-name` pattern.
+- Gateway events: the host's array of `{name ptr, name len, handler}`
+  entries. The extractor finds the one entry named `MESSAGE_CREATE` and
+  walks both ways until an entry stops holding an upper-case name in
+  `.rodata` and a handler in `.text`. The pointers are read through the
+  relocations (RELA, Android's packed APS2 and RELR). The technique is
+  phoenix-unlock's registry walk.
+- Reducers: the exported `LIBDISCORD_REDUCERS_TABLE` is a slice of
+  `(&str domain, &[entry])` with the same entry shape. The extractor reads
+  it through the symbol and checks it against the walk from the
+  `READY_SUPPLEMENTAL` entry, which covers the same entries back to back.
+- Cache tables: the store's table enum. Its `as_str` compiles to an i32
+  offset table and a length table in `.rodata`; the extractor finds the
+  pair from the variant `guild_versions`, not by scanning strings. On
+  32-bit ARM the names are a pointer array that starts right after
+  another enum's, so where it begins can't be told from data alone, and
+  armeabi-v7a contributes no cache tables.
+- Drawables: `resources.arsc`'s drawable type chunks give each entry's
+  configuration and value. An XML drawable's type is its root element,
+  read from the file's binary XML.
+- Prop types: the platform keeps one handler per prop name in a registry
+  class (the one that throws `prop <name> handled twice`), each wrapped in
+  a class that its dispatch loop maps to one typed accessor. The extractor
+  reads the registry's methods, the dispatch loop, the accessors and every
+  registration call from jadx's Java, so no class or method name is
+  hard-coded. Nested objects (span pieces, `forceValue`, motion specs) use
+  PropIds as keys too; their reads through the platform's map class are
+  listed as `key:<type>`.
 
 Models come from the arm64-v8a and x86_64 hosts. The extractor doesn't
 decode 32-bit ARM code, so armeabi-v7a contributes no models. On 356207
@@ -143,8 +182,10 @@ its host lacks one experiment name the 64-bit hosts have
 (`2026-10-android-seamless-pip`), most likely because that build inlines
 the string. The extractor warns about it and records the union.
 
-The value variant each PropId is written with isn't recorded. Reading it
-takes disassembly of the guest's setter calls, which this extractor avoids.
+The value variant the guest writes for each PropId isn't recorded. Reading
+it takes disassembly of the guest's setter calls, which this extractor
+avoids. `propid-types.tsv` records the reading side, which accepts a
+narrower set of tags than the guest could send.
 
 ## CI later
 
