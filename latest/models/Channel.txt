@@ -1,0 +1,23 @@
+# Channel: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+id
+kind
+guild_id
+name
+topic
+position
+parent_id
+permission_overwrites
+nsfw
+provisional
+last_message_id
+last_pin_timestamp
+rate_limit_per_user
+owner_id
+flags
+version
+dm
+thread
+forum
+voice
+extra

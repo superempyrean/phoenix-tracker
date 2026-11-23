@@ -1,0 +1,44 @@
+# Wire constants. Columns: section, code, name, status, check.
+# "extracted" means the extractor read the value from this build. "spec" lines are the recovered
+# spec (rekindle's docs/research/phoenix-wire-protocol.md); their check column says what this build confirmed.
+turn-version	1	-	extracted	the platform's turn decoder compares the first byte with 1
+turn-op	1	create	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	2	update	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	3	children	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	4	delete	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	5	root	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	6	focus	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	7	scrollTo	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	8	requestFrame	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	9	motion	extracted	code: the platform decoder's switch; name: the platform's op-name array
+turn-op	10	childEdits	spec	code: the platform decoder's switch; name: manual (a "childEdits ..." error string exists)
+value-tag	0	Null	spec	code: the platform value decoder's switch; name: manual
+value-tag	1	False	spec	code: the platform value decoder's switch; name: manual
+value-tag	2	True	spec	code: the platform value decoder's switch; name: manual
+value-tag	3	I32	spec	code: the platform value decoder's switch; name: manual
+value-tag	4	I64	spec	code: the platform value decoder's switch; name: manual
+value-tag	5	F64	spec	code: the platform value decoder's switch; name: manual
+value-tag	6	String	spec	code: the platform value decoder's switch; name: manual
+value-tag	7	Array	spec	code: the platform value decoder's switch; name: manual
+value-tag	8	ObjectByPropId	spec	code: the platform value decoder's switch; name: manual
+value-tag	9	Vec4F32	spec	code: the platform value decoder's switch; name: manual
+value-tag	10	MapStringValue	spec	code: the platform value decoder's switch; name: manual
+value-tag	11	Words	spec	code: the platform value decoder's switch; name: manual
+value-tag	12	WordsPatch	spec	code: the platform value decoder's switch; name: manual
+propid-count	855	-	extracted	the host's PropId table and the platform's name array
+frame-header-size	16	-	extracted	the platform's invoke compares the frame length with 16
+frame-kind	1	CALL	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual
+frame-kind	2	REPLY	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual
+frame-kind	3	EVENT	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual
+frame-kind	4	BATCH	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual
+ui-event-prefix	u32 0	-	spec	manual
+ui-event-version	1	-	spec	manual
+ui-event-op	1	ui	spec	name: found in the guest's event-name run in the host; code: manual
+ui-event-op	2	back	spec	manual
+ui-event-op	3	keyCommand	spec	name: found in the guest's event-name run in the host; code: manual
+ui-event-op	4	insets	spec	name: found in the guest's event-name run in the host; code: manual
+ui-event-op	5	window	spec	name: found in the guest's event-name run in the host; code: manual
+ui-event-op	6	frameInterval	spec	name: found in the guest's event-name run in the host; code: manual
+ui-event-op	7	frame	spec	name: found in the guest's event-name run in the host; code: manual
+ui-event-op	8	motion	spec	name: found in the guest's event-name run in the host; code: manual
+ui-event-op	9	navSides	spec	manual

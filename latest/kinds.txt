@@ -1,0 +1,31 @@
+# Element kinds the platform interns, in table order (index, name).
+# Source: classes.dex. Status: extracted.
+0	view
+1	text
+2	stack
+3	image
+4	list
+5	scroll
+6	hscroll
+7	flow
+8	navigator
+9	input
+10	sheet
+11	modal
+12	banner
+13	popover
+14	systemOverlay
+15	player
+16	lottie
+17	rive
+18	video
+19	webframe
+20	zoom
+21	ring
+22	spinner
+23	datePicker
+24	markup
+25	slider
+26	vector_anim
+27	swipeFill
+28	canvas

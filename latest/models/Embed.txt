@@ -1,0 +1,20 @@
+# Embed: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+kind
+title
+description
+url
+color
+timestamp
+author
+footer
+provider
+image
+thumbnail
+video
+fields
+flags
+reference_id
+content_scan_version
+components
+audio

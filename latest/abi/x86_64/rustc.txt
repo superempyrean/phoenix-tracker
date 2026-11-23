@@ -1,0 +1,103 @@
+# Compiler facts per library (x86_64): .comment lines, /rustc/<commit>/ paths, toolchain paths.
+libNitroModules.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libNitroModules.so	comment	Linker: LLD 18.0.2
+libandroidx.graphics.path.so	comment	Linker: LLD 14.0.7
+libandroidx.graphics.path.so	comment	Android (9352603, based on r450784d1) clang version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6)
+libapng-drawable.so	comment	Linker: LLD 18.0.3
+libapng-drawable.so	comment	Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libappmodules.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libappmodules.so	comment	Linker: LLD 18.0.2
+libc++_shared.so	comment	Android (11695104, +pgo, +bolt, +lto, +mlgo, based on r522817) clang version 18.0.1 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libc++_shared.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libc++_shared.so	comment	Linker: LLD 18.0.2
+libcrash-reporting.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libcrash-reporting.so	comment	Linker: LLD 18.0.2
+libdiscord.so	comment	Debian clang version 16.0.6 (++20240714091108+7cbf1a259152-1~exp1~20240714091157.107)
+libdiscord.so	comment	Linker: Debian LLD 16.0.6
+libdiscord.so	comment	Android (8481493, based on r416183c2) clang version 12.0.9 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)
+libdiscord_markdown_jni.so	comment	Android (13691557, +pgo, +bolt, +lto, +mlgo, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libdiscord_markdown_jni.so	comment	rustc version 1.100.0 (0ef1bc386 2026-11-09)
+libdiscord_markdown_jni.so	comment	Linker: LLD 18.0.4
+libdiscord_markdown_jni.so	rustc-commit	0ef1bc386059596dada8fb65b50425aab2ea637a
+libdsti.so	comment	GCC: (GNU) 4.9.x 20150123 (prerelease)
+libdsti.so	comment	Android (7155654, based on r399163b1) clang version 11.0.5 (https://android.googlesource.com/toolchain/llvm-project 87f1315dfbea7c137aa2e6d362dbb457e388158d)
+libdsti.so	comment	Linker: LLD 11.0.5 (/buildbot/src/android/llvm-r399163b/out/llvm-project/lld 87f1315dfbea7c137aa2e6d362dbb457e388158d)
+libfbjni.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libfbjni.so	comment	Linker: LLD 18.0.2
+libgesturehandler.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libgesturehandler.so	comment	Linker: LLD 18.0.2
+libgifimage.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libgifimage.so	comment	Linker: LLD 18.0.2
+libhermestooling.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libhermestooling.so	comment	Linker: LLD 18.0.2
+libhermesvm.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libhermesvm.so	comment	Linker: LLD 18.0.2
+libimagepipeline.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libimagepipeline.so	comment	Linker: LLD 18.0.2
+libjsi.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libjsi.so	comment	Linker: LLD 18.0.2
+libkrisp-audio-sdk.so	comment	Android (13624864, +pgo, +bolt, +lto, +mlgo, based on r530567e) clang version 19.0.1 (https://android.googlesource.com/toolchain/llvm-project 97a699bf4812a18fb657c2779f5296a4ab2694d2)
+libkrisp-audio-sdk.so	comment	Linker: LLD 19.0.1
+libkv_storage.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libkv_storage.so	comment	Linker: LLD 18.0.2
+liblibdiscord_wasm_host.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+liblibdiscord_wasm_host.so	comment	rustc version 1.99.0-nightly (73dc9167f 2026-08-01)
+liblibdiscord_wasm_host.so	comment	Linker: LLD 18.0.2
+liblibdiscord_wasm_host.so	rustc-commit	73dc9167f1cd099e525c9ade2e068d1907b78564
+liblibdiscore-rn-jsi-module.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+liblibdiscore-rn-jsi-module.so	comment	Android (11349228, +pgo, +bolt, +lto, -mlgo, based on r487747e) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
+liblibdiscore-rn-jsi-module.so	comment	rustc version 1.99.0-nightly (73dc9167f 2026-08-01)
+liblibdiscore-rn-jsi-module.so	comment	Linker: LLD 18.0.2
+liblibdiscore-rn-jsi-module.so	rustc-commit	73dc9167f1cd099e525c9ade2e068d1907b78564
+liblibdiscore-rn-jsi-module.so	toolchain	1.99.0-nightly-2026-08-02
+liblitr-jni.so	comment	Android (7714059, based on r416183c1) clang version 12.0.8 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)
+liblitr-jni.so	comment	Linker: LLD 12.0.8 (/buildbot/src/android/llvm-r416183/out/llvm-project/lld c935d99d7cf2016289302412d708641d52d2f7ee)
+libmmkv.so	comment	Android (13324770, +pgo, +bolt, +lto, +mlgo, based on r530567d) clang version 19.0.0 (https://android.googlesource.com/toolchain/llvm-project 97a699bf4812a18fb657c2779f5296a4ab2694d2)
+libmmkv.so	comment	Linker: LLD 19.0.0
+libmmkv.so	comment	Android (13324770, +pgo, -bolt, +lto, -mlgo, based on r530567d) clang version 19.0.0 (https://android.googlesource.com/toolchain/llvm-project 97a699bf4812a18fb657c2779f5296a4ab2694d2)
+libnative-filters.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libnative-filters.so	comment	Linker: LLD 18.0.2
+libnative-imagetranscoder.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libnative-imagetranscoder.so	comment	Linker: LLD 18.0.2
+libnitrofetch.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libnitrofetch.so	comment	Linker: LLD 18.0.2
+libreact_codegen_RNCSlider.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreact_codegen_RNCSlider.so	comment	Linker: LLD 18.0.2
+libreact_codegen_RNKC.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreact_codegen_RNKC.so	comment	Linker: LLD 18.0.2
+libreact_codegen_rngesturehandler_codegen.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreact_codegen_rngesturehandler_codegen.so	comment	Linker: LLD 18.0.2
+libreact_codegen_rnscreens.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreact_codegen_rnscreens.so	comment	Linker: LLD 18.0.2
+libreact_codegen_rnsvg.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreact_codegen_rnsvg.so	comment	Linker: LLD 18.0.2
+libreact_codegen_safeareacontext.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreact_codegen_safeareacontext.so	comment	Linker: LLD 18.0.2
+libreact_utilities.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreact_utilities.so	comment	Linker: LLD 18.0.2
+libreactnative.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreactnative.so	comment	Linker: LLD 18.0.2
+libreanimated.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libreanimated.so	comment	Linker: LLD 18.0.2
+librive-android.so	comment	Linker: LLD 18.0.3
+librive-android.so	comment	Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+librive.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+librive.so	comment	Linker: LLD 18.0.2
+librnscreens.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+librnscreens.so	comment	Linker: LLD 18.0.2
+libsentry-android.so	comment	Android (12027248, +pgo, +bolt, +lto, +mlgo, based on r522817) clang version 18.0.1 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libsentry-android.so	comment	Linker: LLD 18.0.1
+libsentry.so	comment	Android (12027248, +pgo, +bolt, +lto, +mlgo, based on r522817) clang version 18.0.1 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libsentry.so	comment	Linker: LLD 18.0.1
+libsizing_util.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libsizing_util.so	comment	Linker: LLD 18.0.2
+libstatic-webp.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libstatic-webp.so	comment	Linker: LLD 18.0.2
+libtimezone-hermes-fix.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libtimezone-hermes-fix.so	comment	Linker: LLD 18.0.2
+libucrop.so	comment	Android (13065274, +pgo, -bolt, +lto, -mlgo, based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)
+libucrop.so	comment	Android (13065274, +pgo, +bolt, +lto, +mlgo, based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)
+libucrop.so	comment	Linker: LLD 20.0.0 (/Volumes/Android/buildbot/src/android/llvm-r547379-release/out/llvm-project/llvm b718bcaf8c198c82f3021447d943401e3ab5bd54)
+libworklets.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+libworklets.so	comment	Linker: LLD 18.0.2
+libzstd-jni-1.5.7-3.so	comment	Android (5058415 based on r339409) clang version 8.0.2 (https://android.googlesource.com/toolchain/clang 40173bab62ec746213857d083c0e8b0abb568790) (https://android.googlesource.com/toolchain/llvm 7a6618d69e7e8111e1d49dc9e7813767c5ca756a) (based on LLVM 8.0.2svn)

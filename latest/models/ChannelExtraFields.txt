@@ -1,0 +1,5 @@
+# ChannelExtraFields: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+application_id
+linked_lobby
+member_list_id

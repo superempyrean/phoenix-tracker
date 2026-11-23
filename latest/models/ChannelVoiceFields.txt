@@ -1,0 +1,8 @@
+# ChannelVoiceFields: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+bitrate
+user_limit
+rtc_region
+video_quality_mode
+status
+voice_hangout

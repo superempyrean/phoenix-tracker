@@ -1,0 +1,6 @@
+# EmbedAuthor: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+name
+url
+icon_url
+proxy_icon_url

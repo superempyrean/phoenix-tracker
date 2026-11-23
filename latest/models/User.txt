@@ -1,0 +1,19 @@
+# User: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+id
+username
+discriminator
+global_name
+avatar
+bot
+system
+public_flags
+banner
+accent_color
+avatar_decoration_data
+collectibles
+display_name_styles
+primary_guild
+incomplete
+nsfw_allowed
+omitted

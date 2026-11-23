@@ -1,0 +1,15 @@
+# SnapshotMessage: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+kind
+content
+mentions
+mention_roles
+attachments
+embeds
+timestamp
+edited_timestamp
+flags
+components
+sticker_items
+soundboard_sounds
+mention_games

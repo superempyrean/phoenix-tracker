@@ -1,0 +1,17 @@
+# Role: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+id
+name
+color
+hoist
+position
+permissions
+managed
+mentionable
+icon
+unicode_emoji
+flags
+colors
+version
+tags
+description

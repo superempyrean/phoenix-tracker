@@ -1,0 +1,9 @@
+# RoleTags: fields, sorted, from the smallest Deserialize visitor naming bot_id, integration_id, premium_subscriber.
+# Status: extracted (anchored by those fields).
+available_for_purchase
+bot_id
+game_organization_can_invite
+guild_connections
+integration_id
+premium_subscriber
+subscription_listing_id

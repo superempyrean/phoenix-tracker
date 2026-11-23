@@ -1,0 +1,6 @@
+# PrimaryGuild: fields, sorted, from the smallest Deserialize visitor naming badge, identity_guild_id, tag.
+# Status: extracted (anchored by those fields).
+badge
+identity_enabled
+identity_guild_id
+tag

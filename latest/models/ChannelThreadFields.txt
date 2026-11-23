@@ -1,0 +1,10 @@
+# ChannelThreadFields: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+thread_metadata
+last_non_message_activity_timestamp
+member
+member_count
+message_count
+applied_tags
+most_recent_message
+member_ids_preview

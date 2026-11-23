@@ -1,0 +1,5 @@
+# DisplayNameStyles: fields, sorted, from the smallest Deserialize visitor naming colors, effect_id, font_id.
+# Status: extracted (anchored by those fields).
+colors
+effect_id
+font_id

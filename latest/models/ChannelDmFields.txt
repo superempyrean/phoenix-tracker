@@ -1,0 +1,11 @@
+# ChannelDmFields: fields in declaration order, from the guest's Serialize impl.
+# Status: extracted.
+recipients
+recipient_ids
+blocked_user_warning_dismissed
+recipient_flags
+icon
+is_message_request
+is_message_request_timestamp
+is_spam
+safety_warnings

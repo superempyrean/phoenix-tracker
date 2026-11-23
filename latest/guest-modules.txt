@@ -1,0 +1,27 @@
+# The guest's wasm-app feature crates, from crates/<name>/src/ paths in the host. Status: extracted.
+wasm-app
+wasm-app-api
+wasm-app-apps
+wasm-app-auth
+wasm-app-boosting
+wasm-app-chat
+wasm-app-checkpoint
+wasm-app-conjure
+wasm-app-devtools
+wasm-app-expressions
+wasm-app-forums
+wasm-app-friends
+wasm-app-guild-discovery
+wasm-app-guild-events
+wasm-app-guild-settings
+wasm-app-inbox
+wasm-app-onboarding
+wasm-app-platform
+wasm-app-premium
+wasm-app-profile
+wasm-app-quests
+wasm-app-safety
+wasm-app-search
+wasm-app-shop
+wasm-app-user-settings
+wasm-app-voice
