@@ -58,6 +58,12 @@ The x86 split carries no Phoenix host (`liblibdiscord_wasm_host.so`), so
 Phoenix doesn't ship for 32-bit x86. Only its `libs.tsv` and `rustc.txt` are
 written.
 
+A build with no Phoenix host in any split (357202) changes only
+`build.txt`, the ABI tables, `drawables.tsv` and `experiments.txt`. The
+extractor writes empty Phoenix tables for it. Restore them from the
+previous build before committing (`git checkout -- latest`, after staging the
+rest), so the next Phoenix build diffs against the last one that had them.
+
 ## Running the extractor
 
 The extractor needs Python 3.10 or later and nothing outside the standard

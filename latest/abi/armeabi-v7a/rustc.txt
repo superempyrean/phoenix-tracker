@@ -41,10 +41,6 @@ libkrisp-audio-sdk.so	comment	Android (13624864, +pgo, +bolt, +lto, +mlgo, based
 libkrisp-audio-sdk.so	comment	Linker: LLD 19.0.1
 libkv_storage.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
 libkv_storage.so	comment	Linker: LLD 18.0.2
-liblibdiscord_wasm_host.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
-liblibdiscord_wasm_host.so	comment	rustc version 1.99.0-nightly (73dc9167f 2026-08-01)
-liblibdiscord_wasm_host.so	comment	Linker: LLD 18.0.2
-liblibdiscord_wasm_host.so	rustc-commit	73dc9167f1cd099e525c9ade2e068d1907b78564
 liblibdiscore-rn-jsi-module.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
 liblibdiscore-rn-jsi-module.so	comment	Android (11349228, +pgo, +bolt, +lto, -mlgo, based on r487747e) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
 liblibdiscore-rn-jsi-module.so	comment	rustc version 1.99.0-nightly (73dc9167f 2026-08-01)

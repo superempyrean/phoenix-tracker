@@ -2,6 +2,160 @@
 
 Each entry is `python -I extract/diff.py <previous build> <this build>`.
 
+## android 357202
+
+357.2 - Alpha ships no Phoenix. No ABI split carries
+`liblibdiscord_wasm_host.so`, and `classes.dex` has no
+`com/discord/nativeapp` classes. The React Native bundle still names
+`2026-11-phoenix-rollout`. Apart from the host, only `libappmodules.so`
+changed, so this is 357201 with Phoenix taken out. The last 9 `ic_mana_*`
+drawables went with it (517 drawables).
+
+The Phoenix tables (PropIds, kinds, wire, host calls, models and the rest)
+are still 357201's. `build.txt`, the ABI tables, `drawables.tsv` and
+`experiments.txt` are 357202's. 149 experiment names that only the host
+held are gone from `experiments.txt`, and the host column is gone from the
+rest. That section is left out below.
+
+```
+abi/arm64-v8a/libs.tsv
+  removed  liblibdiscord_wasm_host.so	107024984	b03ec53614622b3a6706c88060db43b9a07d757443d865e5437a075e67ac9947
+  changed  libappmodules.so	2934576	b00e2157d9521f0b7a8cc2bc6950b15fbe4779826e1df4aaf61212270a3eb3fc
+        -> libappmodules.so	2936816	b86770075438ad4433021f5653c298103a0f76a2c8346b341f9386e62057758d
+
+abi/arm64-v8a/rustc.txt
+  removed  liblibdiscord_wasm_host.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+  removed  liblibdiscord_wasm_host.so	comment	rustc version 1.99.0-nightly (73dc9167f 2026-08-01)
+  removed  liblibdiscord_wasm_host.so	comment	Linker: LLD 18.0.2
+  removed  liblibdiscord_wasm_host.so	rustc-commit	73dc9167f1cd099e525c9ade2e068d1907b78564
+
+abi/armeabi-v7a/libs.tsv
+  removed  liblibdiscord_wasm_host.so	71101860	3a14dbe02d98d693bbce9f4ca5027d827fafbfbd1b0b372c01da5214518d4f19
+  changed  libappmodules.so	2149248	fe4627eb61da814cd8c2f76eec07dd147b3efaccd778d34f78c085839acdac03
+        -> libappmodules.so	2150448	56bd9f05f6d37b73a410214ae8d2529239158b16fb4646ad1889e775148bfdbe
+
+abi/armeabi-v7a/rustc.txt
+  removed  liblibdiscord_wasm_host.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+  removed  liblibdiscord_wasm_host.so	comment	rustc version 1.99.0-nightly (73dc9167f 2026-08-01)
+  removed  liblibdiscord_wasm_host.so	comment	Linker: LLD 18.0.2
+  removed  liblibdiscord_wasm_host.so	rustc-commit	73dc9167f1cd099e525c9ade2e068d1907b78564
+
+abi/x86/libs.tsv
+  changed  libappmodules.so	3291316	4fb0ea0674ceab529c36e7f5f93c7184f5e2f7f102b2935121d1842100816caf
+        -> libappmodules.so	3293636	cd3c8093ce3b267c360b3658b407f62f478e27cfa1bee7b953752a5a7b177a65
+
+abi/x86_64/libs.tsv
+  removed  liblibdiscord_wasm_host.so	119430624	db96393f7afa030f51eefa08bff10a58874f1531c64c8b4d255c8bb3329181c0
+  changed  libappmodules.so	3130464	f7825f270b367d88484f0c2adcd977855e20f1b1a14d37e3d26f658820947212
+        -> libappmodules.so	3132576	c5665a49d016d6cb5e8c84d7a7411eed813c140c88217a1f5e0fcaa2e09c9e90
+
+abi/x86_64/rustc.txt
+  removed  liblibdiscord_wasm_host.so	comment	Android (12285214, +pgo, +bolt, +lto, +mlgo, based on r522817b) clang version 18.0.2 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+  removed  liblibdiscord_wasm_host.so	comment	rustc version 1.99.0-nightly (73dc9167f 2026-08-01)
+  removed  liblibdiscord_wasm_host.so	comment	Linker: LLD 18.0.2
+  removed  liblibdiscord_wasm_host.so	rustc-commit	73dc9167f1cd099e525c9ade2e068d1907b78564
+
+build.txt
+  added    version-name	357.2 - Alpha
+  added    version-code	357202
+  removed  version-name	357.1 - Alpha
+  removed  version-code	357201
+  changed  apk	base	discord-357201-base.apk	sha256:4c05eb19d087eb408b2e5f772349817d7333afc72f93ba8c1a1a111ee1480701
+        -> apk	base	discord-357202-base.apk	sha256:87dfd79a265e5a0e6f1233d2759ea5a18fa29ca4c7a74ef2d4e6dd8e1ca17e7b
+  changed  apk	config.arm64_v8a	discord-357201-config.arm64_v8a.apk	sha256:2d37434a1e9f2850fc527024ff6f986c9be9560788a7ea912408e26450178860
+        -> apk	config.arm64_v8a	discord-357202-config.arm64_v8a.apk	sha256:9ab2c827a77ba62cb47333e4fe956ac099543c47058e497e72bf4e2f120e168a
+  changed  apk	config.armeabi_v7a	discord-357201-config.armeabi_v7a.apk	sha256:63788fd5ea6cea663657041b1ccbd1e53dcacd35ed63bb827d5d6c9556719a5e
+        -> apk	config.armeabi_v7a	discord-357202-config.armeabi_v7a.apk	sha256:85b2b32d52e95d5eeca1102fdf2e0a519fdd7978ab51fe884768c6c67f533e61
+  changed  apk	config.x86	discord-357201-config.x86.apk	sha256:2ae803c3170479b1e8a34bcbf8e7ddecc2bb140da38b648d7c764d63524c33c8
+        -> apk	config.x86	discord-357202-config.x86.apk	sha256:73ef00d33fec6538da88f060e43e7b9edd68acfb7f61a96fd3da64e98aec1e8c
+  changed  apk	config.x86_64	discord-357201-config.x86_64.apk	sha256:ec963a886ad54d8bb5bcba5d6c6f703a4731548af1f1c22229c926329d445784
+        -> apk	config.x86_64	discord-357202-config.x86_64.apk	sha256:69f373918e64688706bceb29d101c8aee1ce39a7a5ad754b319ee31e7050b745
+  changed  abi	arm64-v8a	45 libs	host
+        -> abi	arm64-v8a	44 libs	no host
+  changed  abi	armeabi-v7a	45 libs	host
+        -> abi	armeabi-v7a	44 libs	no host
+  changed  abi	x86_64	45 libs	host
+        -> abi	x86_64	44 libs	no host
+
+drawables.tsv
+  added    ic_splash_logo_light	v31	inset
+  removed  $guild_profile_empty_state__0	-	gradient
+  removed  $guild_profile_empty_state__1	-	gradient
+  removed  $guild_profile_empty_state__2	-	gradient
+  removed  $guild_profile_empty_state__3	-	gradient
+  removed  appeal_check_with_stars	xxhdpi	png
+  removed  boost_marketing_stars	-	vector
+  removed  boost_marketing_wave	-	vector
+  removed  emoji_picker_placeholder	-	shape
+  removed  guild_profile_empty_state	-	vector
+  removed  ic_app_icon_default	-	vector
+  removed  ic_bad_connection_strong	-	vector
+  removed  ic_bad_connection_weak	-	vector
+  removed  ic_circle_fill	-	vector
+  removed  ic_mana_flower_star	-	vector
+  removed  ic_mana_headphones	-	reference
+  removed  ic_mana_headphones_slash	-	reference
+  removed  ic_mana_microphone	-	reference
+  removed  ic_mana_microphone_slash	-	reference
+  removed  ic_mana_synchronize	-	vector
+  removed  ic_mana_video	-	reference
+  removed  ic_mana_video_slash	-	reference
+  removed  ic_mana_x_small	-	reference
+  removed  ic_media_playback_24dp	-	vector
+  removed  ic_rn_boost_gem_pixel	-	vector
+  removed  ic_rn_quest_skip_backward	-	vector
+  removed  ic_rn_quest_skip_forward	-	vector
+  removed  ic_rn_toolbar_up	-	vector
+  removed  ic_thread_spine_curve	-	vector
+  removed  ic_video_disabled_local_body	-	vector
+  removed  ic_video_disabled_local_slash	-	vector
+  removed  img_nitro_subheader_mobile	xhdpi	png
+  removed  img_tier_0_subheader_mobile	xhdpi	png
+  removed  menu_surface	-	shape
+  removed  nitro_icon	-	vector
+  removed  pinot_notice_caret_border	-	vector
+  removed  pinot_notice_caret_fill	-	vector
+  removed  powerups_boost_gem	-	vector
+  removed  premium_group_wordmark	-	vector
+  removed  premium_role_unavailable	xxhdpi	webp
+  removed  premium_tier_0_logo_small	-	vector
+  removed  premium_tier_2_logo_small	-	vector
+  removed  progress_ring	-	rotate
+  removed  rn_gift_game_placeholder	-	reference
+  removed  rn_gift_premium	-	reference
+  removed  rn_gift_premium_classic	-	reference
+  removed  rn_gifting_blocked_dark	-	reference
+  removed  rn_gifting_blocked_light	-	reference
+  removed  rn_ic_check_24px	-	reference
+  removed  rn_img_discord_nitro_logo_left	-	reference
+  removed  rn_notif_preview_voice	-	reference
+  removed  rn_nuf_add	-	reference
+  removed  rn_platform_img_bungie_dark	nodpi	reference
+  removed  rn_platform_img_bungie_white	-	reference
+  removed  rn_platform_img_roblox_dark	nodpi	reference
+  removed  rn_platform_img_roblox_white	-	reference
+  removed  rn_premium_img_tier_0_clouds	-	reference
+  removed  rn_premium_img_tier_0_mobile	-	reference
+  removed  rn_premium_img_tier_2_clouds	-	reference
+  removed  rn_premium_img_wumpus_nitro	-	reference
+  removed  rn_scrollbar_thumb	-	shape
+  removed  splash_dark	-	layer-list
+  removed  splash_light	-	layer-list
+  removed  splash_logo	v31	inset
+  removed  tenure_badge_bronze_small	xxhdpi	png
+  removed  tenure_badge_diamond_small	xxhdpi	png
+  removed  tenure_badge_emerald_small	xxhdpi	png
+  removed  tenure_badge_gold_small	xxhdpi	png
+  removed  tenure_badge_opal_small	xxhdpi	png
+  removed  tenure_badge_platinum_small	xxhdpi	png
+  removed  tenure_badge_ruby_small	xxhdpi	png
+  removed  tenure_badge_silver_small	xxhdpi	png
+  removed  voice_message_bubble_fill	-	vector
+  removed  voice_message_bubble_outline	-	vector
+  removed  void_warning_circle	-	vector
+  removed  welcome_bg	xxhdpi	webp
+```
+
 ## android 357201
 
 357.1 - Alpha, libdiscord unchanged. The wire format, kinds, models,
