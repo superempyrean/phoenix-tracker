@@ -418,6 +418,7 @@
 1493	Voice.setCallSilence
 1573	MediaPicker.cancelExport
 1576	PushContent.receive
+1580	CheckpointCharacterImage.share
 1581	HostRules.shareExtension
 1586	HostRules.decodeThreads
 1634	HostRules.signInRequired
@@ -444,6 +445,7 @@
 1979	Perf.launchSettled
 1988	Push.headlessReady
 2010	AppTransaction
+2049	MediaPicker.splice
 2108	Voice.ringDeclined
 2131	Ota.takeExit
 2141	Linking.openNotificationSettings
@@ -471,6 +473,7 @@
 2545	HostRules.writeRebase
 2640	HostRules.pickedFrame
 2660	HostRules.riveIsRive
+2721	CheckpointCharacterImage
 2723	Ota.noteExit
 2727	Browser.resumeTracked
 2745	CompanionAuth
@@ -509,9 +512,11 @@
 3337	ImageLoads.pinStats
 3342	PushContent.present
 3343	CrashReporter.firstFrameDrawn
+3369	CheckpointCharacterImage.write
 3377	MediaPicker.export
 3401	UserActivity.set
 3415	MediaTranscoder.imageQuality
 3459	UserActivity
 3462	Ota.verify
 3517	CrashReporter.firstFrameMissed
+3545	CheckpointCharacterImage.save

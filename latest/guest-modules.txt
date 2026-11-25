@@ -15,6 +15,7 @@ wasm-app-guild-discovery
 wasm-app-guild-events
 wasm-app-guild-settings
 wasm-app-inbox
+wasm-app-kit
 wasm-app-onboarding
 wasm-app-platform
 wasm-app-premium

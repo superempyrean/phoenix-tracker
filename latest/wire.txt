@@ -11,7 +11,7 @@ turn-op	6	focus	extracted	code: the platform decoder's switch; name: the platfor
 turn-op	7	scrollTo	extracted	code: the platform decoder's switch; name: the platform's op-name array
 turn-op	8	requestFrame	extracted	code: the platform decoder's switch; name: the platform's op-name array
 turn-op	9	motion	extracted	code: the platform decoder's switch; name: the platform's op-name array
-turn-op	10	childEdits	spec	code: the platform decoder's switch; name: manual (a "childEdits ..." error string exists)
+turn-op	10	childEdits	extracted	code: the platform decoder's switch; name: the platform's op-name array
 value-tag	0	Null	spec	code: the platform value decoder's switch; name: manual
 value-tag	1	False	spec	code: the platform value decoder's switch; name: manual
 value-tag	2	True	spec	code: the platform value decoder's switch; name: manual
@@ -25,7 +25,7 @@ value-tag	9	Vec4F32	spec	code: the platform value decoder's switch; name: manual
 value-tag	10	MapStringValue	spec	code: the platform value decoder's switch; name: manual
 value-tag	11	Words	spec	code: the platform value decoder's switch; name: manual
 value-tag	12	WordsPatch	spec	code: the platform value decoder's switch; name: manual
-propid-count	871	-	extracted	the host's PropId table and the platform's name array
+propid-count	897	-	extracted	the host's PropId table and the platform's name array
 frame-header-size	16	-	extracted	the platform's invoke compares the frame length with 16
 frame-kind	1	CALL	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual
 frame-kind	2	REPLY	spec	code: the platform's invoke accepts kinds 1 to 4; name: manual

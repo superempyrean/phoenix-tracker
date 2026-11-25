@@ -1,7 +1,6 @@
 # Date-prefixed experiment and flag names, and where they occur (host, bundle, dex). Status: extracted.
 2025-04-desktop-refresh-fast-follows	host
 2025-04-native-markdown	bundle,host
-2025-05-search-results-feedback	bundle,host
 2025-08-animated-keyboard-android	bundle
 2025-08-browser-hevc	bundle
 2025-08-voice-user-affinity	bundle,host
@@ -20,7 +19,6 @@
 2025-10-mobile-home-drawer	bundle,host
 2025-10-video-frame-rate-validation	bundle,host
 2025-11-age-verification-expressive-everywhere	host
-2025-11-defer-load-late-lazy-cache	bundle
 2025-11-enhanced-jpeg-encoding-on-ios	bundle,host
 2025-11-global-frame-pool-lock	bundle,host
 2025-11-overlay-chat	bundle,host
@@ -205,7 +203,6 @@
 2026-08-dcf-new-user-cooldown	bundle,host
 2026-08-dont-close-chat	host
 2026-08-fake-play-age-signals	bundle,host
-2026-08-find-coded-links-regex	bundle,host
 2026-08-forward-age-restricted-destinations	bundle,host
 2026-08-game-mode	bundle,host
 2026-08-gsh-subs-activity-bar	host
@@ -236,7 +233,7 @@
 2026-09-desktop-tti-shader-cache	host
 2026-09-desktop-tti-update-check-deadline	host
 2026-09-desktop-voice-message-recording	host
-2026-09-edit-profile-collectibles-ordering	bundle,host
+2026-09-edit-profile-collectibles-ordering	host
 2026-09-friends-sidebar	bundle,host
 2026-09-game-profiles-v3-communities-tab	host
 2026-09-game-search-row	bundle,host
@@ -256,7 +253,7 @@
 2026-09-mobile-interaction-tti	bundle
 2026-09-mobile-nitro-orbs-delivered-modal	bundle,host
 2026-09-mobile-nitro-upsell-in-shop-feed	bundle,host
-2026-09-mobile-nitro-upsell-in-shop-pdp	bundle,host
+2026-09-mobile-nitro-upsell-in-shop-pdp	host
 2026-09-mobile-nlp-search-guild-experiment	bundle,host
 2026-09-mobile-nlp-search-user-flag	bundle,host
 2026-09-mobile-quest-home-sort-priority	bundle,host
@@ -367,6 +364,7 @@
 2026-10-media-viewer-entrance-jank	bundle,host
 2026-10-media-viewer-improvements	bundle,host
 2026-10-media-viewer-video-perf-android	bundle
+2026-10-mobile-image-load-metrics	bundle
 2026-10-mobile-markdown-format-menu	bundle,host
 2026-10-mobile-media-playback	bundle,host
 2026-10-mobile-rtc-v2	bundle,host
@@ -377,6 +375,7 @@
 2026-10-nitro-home-badge-directory	bundle,host
 2026-10-nitro-settings-marketing-page-refresh	host
 2026-10-nitro-tab-remove-account-age-restriction	host
+2026-10-orb-void	host
 2026-10-orbchievements-mobile	bundle,host
 2026-10-overlay-native-window-rendering	bundle,host
 2026-10-pinot-admin	bundle,host
@@ -412,10 +411,11 @@
 2026-10-web-screen-share-audio	bundle
 2026-10-web-streaming-optimizations	bundle
 2026-10-windows-playout-buffer-duration	bundle,host
-2026-11-ad-refresh-immediate-on-focus	bundle
+2026-11-ad-refresh-immediate-on-focus	bundle,host
 2026-11-android-nitro-gift-orders	bundle,host
 2026-11-android-telecom	bundle,dex
 2026-11-apex-launch-latch	bundle
+2026-11-badge-social-comparison-mobile	bundle
 2026-11-bloons-td-battles-account-linking-upsell	bundle,host
 2026-11-build-a-bear-images	bundle,host
 2026-11-checkpoint-intro	bundle,host
@@ -426,18 +426,21 @@
 2026-11-cuj-survey-card	host
 2026-11-desktop-oop-media	host
 2026-11-desktop-window-occlusion-killswitch	host
-2026-11-dtx-forward-all-kill	host
 2026-11-game-exit-promo-bloons	host
+2026-11-game-stats-widget-skip-connect-modal	host
 2026-11-holiday-ringtone	bundle,host
 2026-11-iar-guild-reporting-desktop	host
 2026-11-linux-steam-sku-detection	host
 2026-11-mac-steam-sku-detection	host
-2026-11-mobile-did-background-app-native	bundle
+2026-11-mobile-did-background-app-native	bundle,host
 2026-11-mobile-orb-redemption-thru-orders	bundle,host
+2026-11-mobile-quest-bar-closed-state	bundle,host
 2026-11-mobile-soundboard-sound-creation	bundle,host
 2026-11-multiquest-client	bundle
 2026-11-nitro-mobile-refresh	bundle,host
 2026-11-nitro-upload-badge	host
+2026-11-norbs	host
+2026-11-norbs-2	host
 2026-11-notify-friends-on-custom-status-update	bundle,host
 2026-11-pass-the-controller	bundle,host
 2026-11-payment-element-accordion-layout	host
@@ -445,11 +448,13 @@
 2026-11-phoenix-rollout	bundle,host
 2026-11-phoenix-switch-entrypoint	bundle
 2026-11-phoenix-testing-controls	host
-2026-11-profile-edit-sheet-nitro-updates	bundle
+2026-11-premium-group-continuation-40	host
+2026-11-profile-edit-sheet-nitro-updates	bundle,host
 2026-11-profile-embed-rendering-mobile	bundle,host
 2026-11-quest-bar-android-video	bundle,host
 2026-11-quest-bar-expand-rate-asset-cta	bundle
 2026-11-quest-bar-start-quest-on-click	bundle,host
+2026-11-quest-home-hero-shared-ad-refresh	bundle,host
 2026-11-quest-home-tile-single-elements	bundle,host
 2026-11-quest-home-tile-single-elements-pt-2	bundle,host
 2026-11-quest-home-tile-single-elements-pt-3	bundle,host
@@ -458,9 +463,14 @@
 2026-11-shop-pdp-similar-items	host
 2026-11-shop-this-look-full-profile-button	host
 2026-11-soundboard-upsells-brand-refresh	host
-2026-11-stream-drawing	host
+2026-11-stream-drawing	bundle,host
+2026-11-stream-drawing-guild	bundle,host
 2026-11-subscription-management-settings-brand-refresh	host
 2026-11-three-month-nitro-gifting-no-copy-change	host
+2026-11-user-profile-mobile-editing-refresh	bundle,host
+2026-11-voice-dtx-forward-all	host
+2026-11-voicemod-3p	host
+2026-11-voicemod-non-sub-marketing	host
 2026-11-waterwheels-discover	bundle,host
 2026-11-windows-subwindow-capture	host
 2026-11-wishlist-countdown	bundle,host

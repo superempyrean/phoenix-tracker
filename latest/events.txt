@@ -103,10 +103,14 @@
 2232	@modalNavBar
 2506	@prefersCrossFade
 2507	@rtcRegionLatency
+2592	@alwaysOnCaptions
 2872	@exportProgress
+2957	@checkpointCharacterImage
 3002	@appIconCurrent
 3114	@announcementFinished
 3231	@storekitTransactionUpdated
 3272	@navBar
 3520	@datePickerDialog
+3534	@sideBars
+3564	@spliced
 3576	@companionAuth

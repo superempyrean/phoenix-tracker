@@ -34,12 +34,14 @@ inbox
 inbox-model
 intl
 log
+lottie
 markup
 media
 members
 messaging
 motion
 motion-kit
+net-seam
 onboarding-model
 ops-activity-frame
 ops-analytics
@@ -96,6 +98,7 @@ shop-model
 state
 state-core
 state-model
+sticker-frames
 store
 task
 timeline
@@ -123,6 +126,7 @@ wasm-app-guild-discovery
 wasm-app-guild-events
 wasm-app-guild-settings
 wasm-app-inbox
+wasm-app-kit
 wasm-app-onboarding
 wasm-app-platform
 wasm-app-premium
