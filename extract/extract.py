@@ -140,8 +140,10 @@ def platform_tables(base):
                 found["methods"] = pairs
             if "unknown op " in m.strings and m.switches:
                 found["op_switch"] = m.switches[0][1]
-                # The decoder reads the first byte and compares it with a literal.
-                found["version_check"] = "view wire version " in m.strings and m.ints[:2] == [0, 1]
+            # The decoder reads the first byte and compares it with a literal. Up to
+            # 357200 that is the op decoder; from 357201 it is a method of its own.
+            if "view wire version " in m.strings and m.ints[:2] == [0, 1]:
+                found["version_check"] = True
             if "unknown value tag " in m.strings and m.switches:
                 found["tag_switch"] = m.switches[0][1]
             if m.name == "invoke" and m.cls.endswith("/GuestHost;"):
