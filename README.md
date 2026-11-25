@@ -60,9 +60,10 @@ written.
 
 A build with no Phoenix host in any split (357202) changes only
 `build.txt`, the ABI tables, `drawables.tsv` and `experiments.txt`. The
-extractor writes empty Phoenix tables for it. Restore them from the
-previous build before committing (`git checkout -- latest`, after staging the
-rest), so the next Phoenix build diffs against the last one that had them.
+extractor deletes the Phoenix tables and rewrites `wire.txt` for it.
+Before staging anything, restore them with `git ls-files -d | xargs git
+checkout --` and `git checkout -- latest/wire.txt`, so the next Phoenix
+build diffs against the last one that had them.
 
 ## Running the extractor
 
