@@ -2,6 +2,195 @@
 
 Each entry is `python -I extract/diff.py <previous build> <this build>`.
 
+## android 357203
+
+357.3 - Alpha ships Phoenix again, with libdiscord unchanged. The diff
+below is against 357201, the last build with Phoenix, whose Phoenix tables
+357202 kept. The wire format, kinds, models, exports, gateway events,
+reducers and cache tables are unchanged. 4 PropIds are appended (897 to
+900), and no existing id moved. The platform reads one of them,
+`accessibilityLeads`, as a Bool.
+
+The host now links wasmtime 36.0.20 and cranelift 0.123.20, with
+`pulley-interpreter` in place of cranelift's native backend on
+armeabi-v7a, and `jpeg-encoder` is gone. Its strings reject a precompiled
+module whose SHA-256 doesn't match a manifest, and name `worklets-*.cwasm`
+files. No APK carries a `.wasm` or `.cwasm` file. The guest gained the
+`wasm-app-channel-list` module. Apart from the host, which grew by 6.1 MB
+on x86_64, only `libappmodules.so` changed since 357201.
+
+```
+abi/arm64-v8a/crates.txt
+  added    allocator-api2@0.2.21
+  added    bumpalo@3.20.3
+  added    cranelift-bforest@0.123.20
+  added    cranelift-bitset@0.123.20
+  added    cranelift-codegen@0.123.20
+  added    cranelift-entity@0.123.20
+  added    cranelift-frontend@0.123.20
+  added    cranelift-native@0.123.20
+  added    crossbeam-epoch@0.9.21
+  added    foldhash@0.1.5
+  added    gimli@0.32.3
+  added    hashbrown@0.15.5
+  added    itertools@0.14.0
+  added    object@0.37.3
+  added    rayon-core@1.13.0
+  added    rayon@1.12.0
+  added    regalloc2@0.12.2
+  added    semver@1.0.28
+  added    target-lexicon@0.13.5
+  added    wasmparser@0.236.1
+  added    wasmtime-environ@36.0.20
+  added    wasmtime-internal-cranelift@36.0.20
+  added    wasmtime-internal-jit-icache-coherence@36.0.20
+  added    wasmtime-internal-math@36.0.20
+  added    wasmtime-internal-slab@36.0.20
+  added    wasmtime-internal-unwinder@36.0.20
+  added    wasmtime@36.0.20
+  removed  jpeg-encoder@0.6.1
+
+abi/arm64-v8a/libs.tsv
+  changed  libappmodules.so	2934576	b00e2157d9521f0b7a8cc2bc6950b15fbe4779826e1df4aaf61212270a3eb3fc
+        -> libappmodules.so	2936816	b86770075438ad4433021f5653c298103a0f76a2c8346b341f9386e62057758d
+  changed  liblibdiscord_wasm_host.so	107024984	b03ec53614622b3a6706c88060db43b9a07d757443d865e5437a075e67ac9947
+        -> liblibdiscord_wasm_host.so	111701832	26d6cf7cf9bb024b760b70760165e8dd2652c88fb86fde65132630b08a10d194
+
+abi/armeabi-v7a/crates.txt
+  added    allocator-api2@0.2.21
+  added    bumpalo@3.20.3
+  added    cranelift-bforest@0.123.20
+  added    cranelift-bitset@0.123.20
+  added    cranelift-codegen@0.123.20
+  added    cranelift-entity@0.123.20
+  added    cranelift-frontend@0.123.20
+  added    crossbeam-epoch@0.9.21
+  added    foldhash@0.1.5
+  added    gimli@0.32.3
+  added    hashbrown@0.15.5
+  added    itertools@0.14.0
+  added    object@0.37.3
+  added    pulley-interpreter@36.0.20
+  added    rayon-core@1.13.0
+  added    rayon@1.12.0
+  added    regalloc2@0.12.2
+  added    semver@1.0.28
+  added    target-lexicon@0.13.5
+  added    wasmparser@0.236.1
+  added    wasmtime-environ@36.0.20
+  added    wasmtime-internal-cranelift@36.0.20
+  added    wasmtime-internal-math@36.0.20
+  added    wasmtime-internal-slab@36.0.20
+  added    wasmtime-internal-unwinder@36.0.20
+  added    wasmtime@36.0.20
+  removed  jpeg-encoder@0.6.1
+
+abi/armeabi-v7a/libs.tsv
+  changed  libappmodules.so	2149248	fe4627eb61da814cd8c2f76eec07dd147b3efaccd778d34f78c085839acdac03
+        -> libappmodules.so	2150448	56bd9f05f6d37b73a410214ae8d2529239158b16fb4646ad1889e775148bfdbe
+  changed  liblibdiscord_wasm_host.so	71101860	3a14dbe02d98d693bbce9f4ca5027d827fafbfbd1b0b372c01da5214518d4f19
+        -> liblibdiscord_wasm_host.so	73817812	8c9b6286ab504dcbc9cef80fad23b44c8c7e0fbdde359c56c26b2e4eeb56c74c
+
+abi/x86/libs.tsv
+  changed  libappmodules.so	3291316	4fb0ea0674ceab529c36e7f5f93c7184f5e2f7f102b2935121d1842100816caf
+        -> libappmodules.so	3293636	cd3c8093ce3b267c360b3658b407f62f478e27cfa1bee7b953752a5a7b177a65
+
+abi/x86_64/crates.txt
+  added    allocator-api2@0.2.21
+  added    bumpalo@3.20.3
+  added    cranelift-assembler-x64@0.123.20
+  added    cranelift-bforest@0.123.20
+  added    cranelift-bitset@0.123.20
+  added    cranelift-codegen@0.123.20
+  added    cranelift-entity@0.123.20
+  added    cranelift-frontend@0.123.20
+  added    cranelift-native@0.123.20
+  added    crossbeam-epoch@0.9.21
+  added    foldhash@0.1.5
+  added    gimli@0.32.3
+  added    hashbrown@0.15.5
+  added    itertools@0.14.0
+  added    object@0.37.3
+  added    rayon-core@1.13.0
+  added    rayon@1.12.0
+  added    regalloc2@0.12.2
+  added    semver@1.0.28
+  added    target-lexicon@0.13.5
+  added    wasmparser@0.236.1
+  added    wasmtime-environ@36.0.20
+  added    wasmtime-internal-cranelift@36.0.20
+  added    wasmtime-internal-math@36.0.20
+  added    wasmtime-internal-slab@36.0.20
+  added    wasmtime-internal-unwinder@36.0.20
+  added    wasmtime@36.0.20
+  removed  jpeg-encoder@0.6.1
+
+abi/x86_64/libs.tsv
+  changed  libappmodules.so	3130464	f7825f270b367d88484f0c2adcd977855e20f1b1a14d37e3d26f658820947212
+        -> libappmodules.so	3132576	c5665a49d016d6cb5e8c84d7a7411eed813c140c88217a1f5e0fcaa2e09c9e90
+  changed  liblibdiscord_wasm_host.so	119430624	db96393f7afa030f51eefa08bff10a58874f1531c64c8b4d255c8bb3329181c0
+        -> liblibdiscord_wasm_host.so	125557136	be10d806a70debf09e798cfce2f8cd02a416556737f3e3684a737504d5810629
+
+atoms.tsv
+  added    1772	httpsOnly
+  added    1915	keepFocus
+  added    2725	train
+
+build.txt
+  added    version-name	357.3 - Alpha
+  added    version-code	357203
+  removed  version-name	357.1 - Alpha
+  removed  version-code	357201
+  changed  apk	base	discord-357201-base.apk	sha256:4c05eb19d087eb408b2e5f772349817d7333afc72f93ba8c1a1a111ee1480701
+        -> apk	base	discord-357203-base.apk	sha256:95715d3277deebeca8c0ef091778300701012c4fa05099d89896a6d9413c0474
+  changed  apk	config.arm64_v8a	discord-357201-config.arm64_v8a.apk	sha256:2d37434a1e9f2850fc527024ff6f986c9be9560788a7ea912408e26450178860
+        -> apk	config.arm64_v8a	discord-357203-config.arm64_v8a.apk	sha256:1f69dfb7874ff0fc91ad7ad29de987d66c74033d7355280545a05da9430dd76f
+  changed  apk	config.armeabi_v7a	discord-357201-config.armeabi_v7a.apk	sha256:63788fd5ea6cea663657041b1ccbd1e53dcacd35ed63bb827d5d6c9556719a5e
+        -> apk	config.armeabi_v7a	discord-357203-config.armeabi_v7a.apk	sha256:5af63431da9d45adbf6a4d6d070f75444dbb51f40b64d445f011cc57ee58d4cf
+  changed  apk	config.x86	discord-357201-config.x86.apk	sha256:2ae803c3170479b1e8a34bcbf8e7ddecc2bb140da38b648d7c764d63524c33c8
+        -> apk	config.x86	discord-357203-config.x86.apk	sha256:9613a6e7ea8f068a0ceef09dfbd179bbe4172a7fc73e648c61081bc81f9b19e2
+  changed  apk	config.x86_64	discord-357201-config.x86_64.apk	sha256:ec963a886ad54d8bb5bcba5d6c6f703a4731548af1f1c22229c926329d445784
+        -> apk	config.x86_64	discord-357203-config.x86_64.apk	sha256:80585bf9dfe60a30f9e3d2afc76d8baace4105321757542bf1b8ddd50c630b1a
+
+drawables.tsv
+  added    adx_ic_other_sign_in	-	vector
+  added    ic_splash_logo_light	v31	inset
+  added    splash_logo_light	v31	inset
+
+experiments.txt
+  added    2026-11-app-block	host
+  added    2026-11-badge-social-comparison	host
+  added    2026-11-badge-social-comparison-mobile	bundle,host
+  removed  2026-09-edit-profile-collectibles-ordering	host
+  removed  2026-09-mobile-nitro-upsell-in-shop-feed	bundle,host
+  removed  2026-09-mobile-nitro-upsell-in-shop-pdp	host
+  removed  2026-11-badge-social-comparison-mobile	bundle
+
+first-party-crates.txt
+  added    wasm-app-channel-list
+
+guest-modules.txt
+  added    wasm-app-channel-list
+
+propid-types.tsv
+  added    897	linkInBackdrop	-	unread
+  added    898	accessibilityLeads	Bool	n0.j
+  added    899	keepScreenFocus	-	unread
+  added    900	drawDistance	-	unread
+  392 props read by other classes (jadx names; usually renaming)
+
+propids.tsv
+  added    897	linkInBackdrop
+  added    898	accessibilityLeads
+  added    899	keepScreenFocus
+  added    900	drawDistance
+
+wire.txt
+  added    propid-count	901	-	extracted	the host's PropId table and the platform's name array
+  removed  propid-count	897	-	extracted	the host's PropId table and the platform's name array
+
+```
+
 ## android 357202
 
 357.2 - Alpha ships no Phoenix. No ABI split carries

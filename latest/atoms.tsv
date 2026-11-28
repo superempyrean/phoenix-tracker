@@ -1014,6 +1014,7 @@
 1732	loadFailureUrl
 1750	mmkvToken
 1751	playoutVolume
+1772	httpsOnly
 1775	titleStart
 1776	selStart
 1780	fakeScenario
@@ -1033,6 +1034,7 @@
 1888	navRight
 1906	maxCachedBytes
 1908	zoom
+1915	keepFocus
 1920	jankStatsExpectedMs
 1925	imageCacheKey
 1928	launchLink
@@ -1147,6 +1149,7 @@
 2715	facts
 2718	output
 2724	ssim_ms
+2725	train
 2731	feed
 2732	op
 2744	maxAgeMs

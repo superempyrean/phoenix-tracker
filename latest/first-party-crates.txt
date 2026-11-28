@@ -115,6 +115,7 @@ wasm-app-api
 wasm-app-apps
 wasm-app-auth
 wasm-app-boosting
+wasm-app-channel-list
 wasm-app-chat
 wasm-app-checkpoint
 wasm-app-conjure
