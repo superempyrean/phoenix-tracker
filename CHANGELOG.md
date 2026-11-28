@@ -2,6 +2,129 @@
 
 Each entry is `python -I extract/diff.py <previous build> <this build>`.
 
+## android 357204
+
+357.4 - Alpha. The wire format, kinds, models, gateway events, reducers
+and cache tables are unchanged. 5 PropIds are appended (901 to 905), and
+no existing id moved. The platform reads all 5, 4 of them as Bool and
+`minHeightHold` as a Number.
+
+The host gained a `SoundboardAudio` module (`loadPreview`, `trim`,
+`isOpusEncoderAvailable`), the `@soundboardAudio` event and the
+`dme_mobile_host_soundboard_ogg_opus` export. The guest gained the
+`wasm-app-forwarding` and `wasm-app-guild-rail` modules. The new atoms
+include `apks`, `expectedLibs`, `signers`, `integrity` and `installer`.
+x86_64 no longer links `rand_chacha`. Only the host and
+`libappmodules.so` changed.
+
+```
+abi/arm64-v8a/libs.tsv
+  changed  libappmodules.so	2936816	b86770075438ad4433021f5653c298103a0f76a2c8346b341f9386e62057758d
+        -> libappmodules.so	2935488	13fedb3bd3e48fff2e00d924a66a188cee12f0fc183008c5b51b75f7c976be72
+  changed  liblibdiscord_wasm_host.so	111701832	26d6cf7cf9bb024b760b70760165e8dd2652c88fb86fde65132630b08a10d194
+        -> liblibdiscord_wasm_host.so	112438024	1bf3843812b8da41e64fc5e3027582f2a37c2931474062bb8d0efbb9c52d5cbb
+
+abi/armeabi-v7a/libs.tsv
+  changed  libappmodules.so	2150448	56bd9f05f6d37b73a410214ae8d2529239158b16fb4646ad1889e775148bfdbe
+        -> libappmodules.so	2149744	38069eb1a60d403d00ac9ad9d1efbe57b9f0fc658d1c74712fddcfb3e8956197
+  changed  liblibdiscord_wasm_host.so	73817812	8c9b6286ab504dcbc9cef80fad23b44c8c7e0fbdde359c56c26b2e4eeb56c74c
+        -> liblibdiscord_wasm_host.so	74302652	6f825b105c0375fb7edfb86402256ecc5c6550d395292b30a81bef2db62aaf72
+
+abi/x86/libs.tsv
+  changed  libappmodules.so	3293636	cd3c8093ce3b267c360b3658b407f62f478e27cfa1bee7b953752a5a7b177a65
+        -> libappmodules.so	3292372	49bb58f615770baee59f4fff14fd2b1221adc72c6bc3fecad587775baa578d8c
+
+abi/x86_64/crates.txt
+  removed  rand_chacha@0.3.1
+
+abi/x86_64/libs.tsv
+  changed  libappmodules.so	3132576	c5665a49d016d6cb5e8c84d7a7411eed813c140c88217a1f5e0fcaa2e09c9e90
+        -> libappmodules.so	3131328	89889edd2217100d6724209ce81d8f7c7750e4923b6c0c60252b4c8ba8be9974
+  changed  liblibdiscord_wasm_host.so	125557136	be10d806a70debf09e798cfce2f8cd02a416556737f3e3684a737504d5810629
+        -> liblibdiscord_wasm_host.so	126334560	862075d63d8858c24252613e502df3cae8271abedfe1bead1c04ccd31fe5af6f
+
+atoms.tsv
+  added    1611	history
+  added    1846	audioUri
+  added    1872	galleryName
+  added    2062	signers
+  added    2563	waveform
+  added    2850	endMs
+  added    2880	expectedLibs
+  added    2951	integrity
+  added    2967	initiator
+  added    2981	waveformSampleCount
+  added    2999	startMs
+  added    3008	apks
+  added    3402	installer
+  added    3477	package
+
+build.txt
+  added    version-name	357.4 - Alpha
+  added    version-code	357204
+  removed  version-name	357.3 - Alpha
+  removed  version-code	357203
+  changed  apk	base	discord-357203-base.apk	sha256:95715d3277deebeca8c0ef091778300701012c4fa05099d89896a6d9413c0474
+        -> apk	base	discord-357204-base.apk	sha256:93213a30a9bdb2399832e6d7df6d6c7b4edcc6785844b43638059f7d9190005c
+  changed  apk	config.arm64_v8a	discord-357203-config.arm64_v8a.apk	sha256:1f69dfb7874ff0fc91ad7ad29de987d66c74033d7355280545a05da9430dd76f
+        -> apk	config.arm64_v8a	discord-357204-config.arm64_v8a.apk	sha256:86cec6de95b541410a5214ce02fd0f398ab3797f53f98f0a17e153ac3ee4a740
+  changed  apk	config.armeabi_v7a	discord-357203-config.armeabi_v7a.apk	sha256:5af63431da9d45adbf6a4d6d070f75444dbb51f40b64d445f011cc57ee58d4cf
+        -> apk	config.armeabi_v7a	discord-357204-config.armeabi_v7a.apk	sha256:0536706a221cec2ddac9f4ee2cd6bfd5a7cb56c8e2c8e48ada1615e0b7e17e48
+  changed  apk	config.x86	discord-357203-config.x86.apk	sha256:9613a6e7ea8f068a0ceef09dfbd179bbe4172a7fc73e648c61081bc81f9b19e2
+        -> apk	config.x86	discord-357204-config.x86.apk	sha256:0e52534cce8f0d382e33e374bcfe99a9021d10e0aefe0044e50e449cc06cd89b
+  changed  apk	config.x86_64	discord-357203-config.x86_64.apk	sha256:80585bf9dfe60a30f9e3d2afc76d8baace4105321757542bf1b8ddd50c630b1a
+        -> apk	config.x86_64	discord-357204-config.x86_64.apk	sha256:8470912357d3ac2c73e8cf07a06ce4f3f651321537e0c9d056e05b0438fe4cdb
+
+events.txt
+  added    2369	@soundboardAudio
+
+experiments.txt
+  added    2026-11-nitro-trials-brand-refresh	host
+  added    2026-11-phoenix-switch-entrypoint	bundle,host
+  added    2026-11-shop-promotion-expiry-refetch	host
+  removed  2026-10-profile-default-tab-with-content	host
+  removed  2026-11-phoenix-switch-entrypoint	bundle
+
+exports.txt
+  added    dme_mobile_host_soundboard_ogg_opus
+
+first-party-crates.txt
+  added    wasm-app-forwarding
+  added    wasm-app-guild-rail
+
+guest-modules.txt
+  added    wasm-app-forwarding
+  added    wasm-app-guild-rail
+
+host-calls.txt
+  added    2060	CrashReporter.noteTestCrash
+  added    2176	SoundboardAudio.loadPreview
+  added    2285	SoundboardAudio.isOpusEncoderAvailable
+  added    2417	SoundboardAudio.trim
+  added    2455	SoundboardAudio
+  added    2513	CrashReports.noteTestCrash
+
+propid-types.tsv
+  added    901	resourceDensity	Bool	n0.j
+  added    902	accessibilityNoStop	Bool	n0.j
+  added    903	runsUnderKeyboard	Bool	n0.j
+  added    904	minHeightHold	Number	n0.j
+  added    905	opensAtMinHeight	Bool	n0.j
+  114 props read by other classes (jadx names; usually renaming)
+
+propids.tsv
+  added    901	resourceDensity
+  added    902	accessibilityNoStop
+  added    903	runsUnderKeyboard
+  added    904	minHeightHold
+  added    905	opensAtMinHeight
+
+wire.txt
+  added    propid-count	906	-	extracted	the host's PropId table and the platform's name array
+  removed  propid-count	901	-	extracted	the host's PropId table and the platform's name array
+
+```
+
 ## android 357203
 
 357.3 - Alpha ships Phoenix again, with libdiscord unchanged. The diff

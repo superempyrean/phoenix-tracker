@@ -380,7 +380,6 @@
 2026-10-pinot-member	bundle,host
 2026-10-pinot-member-notice	bundle,host
 2026-10-pinot-summary-management	bundle,host
-2026-10-profile-default-tab-with-content	host
 2026-10-profile-nitro-upsell-refresh	host
 2026-10-profile-read-state	bundle,host
 2026-10-recurring-referral-reminder	bundle,host
@@ -437,6 +436,7 @@
 2026-11-mobile-soundboard-sound-creation	bundle,host
 2026-11-multiquest-client	bundle
 2026-11-nitro-mobile-refresh	bundle,host
+2026-11-nitro-trials-brand-refresh	host
 2026-11-nitro-upload-badge	host
 2026-11-norbs	host
 2026-11-norbs-2	host
@@ -445,7 +445,7 @@
 2026-11-payment-element-accordion-layout	host
 2026-11-phoenix-app-access	host
 2026-11-phoenix-rollout	bundle,host
-2026-11-phoenix-switch-entrypoint	bundle
+2026-11-phoenix-switch-entrypoint	bundle,host
 2026-11-phoenix-testing-controls	host
 2026-11-premium-group-continuation-40	host
 2026-11-profile-edit-sheet-nitro-updates	bundle,host
@@ -460,6 +460,7 @@
 2026-11-return-full-quest-status-in-decision	bundle,host
 2026-11-screen-share-dtx	bundle,host
 2026-11-shop-pdp-similar-items	host
+2026-11-shop-promotion-expiry-refetch	host
 2026-11-shop-this-look-full-profile-button	host
 2026-11-soundboard-upsells-brand-refresh	host
 2026-11-stream-drawing	bundle,host

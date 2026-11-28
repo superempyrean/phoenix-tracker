@@ -122,9 +122,11 @@ wasm-app-conjure
 wasm-app-devtools
 wasm-app-expressions
 wasm-app-forums
+wasm-app-forwarding
 wasm-app-friends
 wasm-app-guild-discovery
 wasm-app-guild-events
+wasm-app-guild-rail
 wasm-app-guild-settings
 wasm-app-inbox
 wasm-app-kit

@@ -901,3 +901,8 @@
 898	accessibilityLeads
 899	keepScreenFocus
 900	drawDistance
+901	resourceDensity
+902	accessibilityNoStop
+903	runsUnderKeyboard
+904	minHeightHold
+905	opensAtMinHeight

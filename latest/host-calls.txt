@@ -446,6 +446,7 @@
 1988	Push.headlessReady
 2010	AppTransaction
 2049	MediaPicker.splice
+2060	CrashReporter.noteTestCrash
 2108	Voice.ringDeclined
 2131	Ota.takeExit
 2141	Linking.openNotificationSettings
@@ -454,10 +455,12 @@
 2167	Updates.rootPath
 2171	Ota.keepManifestEtag
 2175	Perf.crashReports
+2176	SoundboardAudio.loadPreview
 2183	RnStrings.packLocale
 2196	Voice.backgroundRestricted
 2244	HostRules.riveAllowed
 2252	Browser.openAuthSession
+2285	SoundboardAudio.isOpusEncoderAvailable
 2320	DatePickerDialog.close
 2365	Images.size
 2394	AppShortcuts.launchAccount
@@ -465,10 +468,13 @@
 2410	Browser.openTracked
 2411	HostRules.readClearsAndroid
 2413	HostRules.smoothSeek
+2417	SoundboardAudio.trim
 2435	AppTransaction.fetch
+2455	SoundboardAudio
 2465	DatePickerDialog
 2470	DatePickerDialog.open
 2481	PushContent.messageFetched
+2513	CrashReports.noteTestCrash
 2527	HostRules.inboxActive
 2545	HostRules.writeRebase
 2640	HostRules.pickedFrame

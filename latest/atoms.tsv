@@ -995,6 +995,7 @@
 1568	onDisk
 1592	wanted
 1607	restricted
+1611	history
 1615	tombstoneCause
 1622	titleTrailing
 1625	selectivelySyncedUserSettings
@@ -1025,11 +1026,13 @@
 1821	videoExpiryEverySecs
 1840	types
 1845	warns
+1846	audioUri
 1853	eligibleForHandoff
 1856	names
 1863	spentMs
 1868	iconUrl
 1871	apiMemory
+1872	galleryName
 1881	notificationSettings
 1888	navRight
 1906	maxCachedBytes
@@ -1053,6 +1056,7 @@
 2034	then
 2054	kept
 2057	selEnd
+2062	signers
 2063	profile
 2086	spans
 2088	parityClock
@@ -1125,6 +1129,7 @@
 2543	inputAt
 2547	rtts
 2548	fallbackTitle
+2563	waveform
 2582	compose
 2587	container
 2595	launchToken
@@ -1171,9 +1176,11 @@
 2836	right
 2837	idle
 2847	reportNoMic
+2850	endMs
 2860	sentAt
 2869	currencySymbol
 2879	localizedPrice
+2880	expectedLibs
 2885	json
 2896	foreground
 2899	cancelText
@@ -1186,10 +1193,15 @@
 2933	titleLocKey
 2935	extension
 2948	scale
+2951	integrity
+2967	initiator
+2981	waveformSampleCount
 2990	send_label
 2998	buttons
+2999	startMs
 3001	conversationSuggestions
 3003	rectWidth
+3008	apks
 3030	actionKinds
 3037	threads
 3039	ducked
@@ -1248,6 +1260,7 @@
 3354	receivedAtMs
 3364	beforeMs
 3397	reports
+3402	installer
 3419	opened
 3420	timeoutMs
 3421	trigger
@@ -1261,6 +1274,7 @@
 3455	heights
 3465	picture
 3467	applyMs
+3477	package
 3478	applied
 3480	ids
 3481	presented
