@@ -2,6 +2,95 @@
 
 Each entry is `python -I extract/diff.py <previous build> <this build>`.
 
+## android 357205
+
+357.5 - Alpha. The wire format, kinds, models, exports, gateway events,
+reducers and cache tables are unchanged. One PropId is appended,
+`corners` (906), which the platform reads only as a Bool key inside a
+nested object. No existing id moved.
+
+The host gained `Linking.openURLChecked` and `Perf.markDrawn`, with the
+`@urlOpened` and `@drawn` events. The guest gained the
+`wasm-app-private-channels` module, and the host now links `rustix`.
+Only the host changed among the native libraries.
+
+```
+abi/arm64-v8a/crates.txt
+  added    rustix@1.1.6
+
+abi/arm64-v8a/libs.tsv
+  changed  liblibdiscord_wasm_host.so	112438024	1bf3843812b8da41e64fc5e3027582f2a37c2931474062bb8d0efbb9c52d5cbb
+        -> liblibdiscord_wasm_host.so	112845168	fbf67d6c673b8378aa9c159c64926c3366ce0ffd5bc3cc2361f40721d66414f4
+
+abi/armeabi-v7a/crates.txt
+  added    rustix@1.1.6
+
+abi/armeabi-v7a/libs.tsv
+  changed  liblibdiscord_wasm_host.so	74302652	6f825b105c0375fb7edfb86402256ecc5c6550d395292b30a81bef2db62aaf72
+        -> liblibdiscord_wasm_host.so	74556060	d22fc8475189669039287aafe7876b2b627804293d2f5bd54d4a7db1094c83fd
+
+abi/x86_64/crates.txt
+  added    rustix@1.1.6
+
+abi/x86_64/libs.tsv
+  changed  liblibdiscord_wasm_host.so	126334560	862075d63d8858c24252613e502df3cae8271abedfe1bead1c04ccd31fe5af6f
+        -> liblibdiscord_wasm_host.so	126762664	b8788f38e53d40f08a03a1973b431697000c382a7975c711651019d2e30fe0c8
+
+atoms.tsv
+  added    1599	formatLocale
+  added    1999	osEnabled
+  added    3537	uploadName
+
+build.txt
+  added    version-name	357.5 - Alpha
+  added    version-code	357205
+  removed  version-name	357.4 - Alpha
+  removed  version-code	357204
+  changed  apk	base	discord-357204-base.apk	sha256:93213a30a9bdb2399832e6d7df6d6c7b4edcc6785844b43638059f7d9190005c
+        -> apk	base	discord-357205-base.apk	sha256:4ff62b1348e689f13e13798a70c35d4d375f318c671edee32dd62fcc5a0883e5
+  changed  apk	config.arm64_v8a	discord-357204-config.arm64_v8a.apk	sha256:86cec6de95b541410a5214ce02fd0f398ab3797f53f98f0a17e153ac3ee4a740
+        -> apk	config.arm64_v8a	discord-357205-config.arm64_v8a.apk	sha256:09a95e14e9dbe636aac282bba1e126d54e31bd4d7c55a29d83293fef67cce874
+  changed  apk	config.armeabi_v7a	discord-357204-config.armeabi_v7a.apk	sha256:0536706a221cec2ddac9f4ee2cd6bfd5a7cb56c8e2c8e48ada1615e0b7e17e48
+        -> apk	config.armeabi_v7a	discord-357205-config.armeabi_v7a.apk	sha256:1f2d3131c5b026fa8bad30aea103d1fceef56831c74993f5efbb7f67d170cf51
+  changed  apk	config.x86	discord-357204-config.x86.apk	sha256:0e52534cce8f0d382e33e374bcfe99a9021d10e0aefe0044e50e449cc06cd89b
+        -> apk	config.x86	discord-357205-config.x86.apk	sha256:4456a5269d5c1519f1987b92275e1acbb795ffa3734096608c0be163b30085b7
+  changed  apk	config.x86_64	discord-357204-config.x86_64.apk	sha256:8470912357d3ac2c73e8cf07a06ce4f3f651321537e0c9d056e05b0438fe4cdb
+        -> apk	config.x86_64	discord-357205-config.x86_64.apk	sha256:196c7f31541a1bff7b26eb03320ac38e0ed7a8babed83576d33560525970b955
+
+drawables.tsv
+  added    activate_device_background	xxhdpi	jpg
+
+events.txt
+  added    1582	@drawn
+  added    2302	@urlOpened
+
+experiments.txt
+  added    2026-11-voice-activity-status-group	host
+  removed  2026-10-remove-quests-from-discovery	host
+
+first-party-crates.txt
+  added    wasm-app-private-channels
+
+guest-modules.txt
+  added    wasm-app-private-channels
+
+host-calls.txt
+  added    3061	Linking.openURLChecked
+  added    3535	Perf.markDrawn
+
+propid-types.tsv
+  added    906	corners	key:Bool	oh.m
+  383 props read by other classes (jadx names; usually renaming)
+
+propids.tsv
+  added    906	corners
+
+wire.txt
+  added    propid-count	907	-	extracted	the host's PropId table and the platform's name array
+  removed  propid-count	906	-	extracted	the host's PropId table and the platform's name array
+
+```
+
 ## android 357204
 
 357.4 - Alpha. The wire format, kinds, models, gateway events, reducers

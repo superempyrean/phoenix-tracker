@@ -498,6 +498,7 @@
 3026	CrashReports.clearUser
 3052	PushContent.messageFetch
 3060	HostRules.inboxSave
+3061	Linking.openURLChecked
 3090	Voice.stopAllSounds
 3099	MediaTranscoder.rewriteOriginal
 3147	PushContent.withdrawnRecord
@@ -525,4 +526,5 @@
 3459	UserActivity
 3462	Ota.verify
 3517	CrashReporter.firstFrameMissed
+3535	Perf.markDrawn
 3545	CheckpointCharacterImage.save

@@ -383,7 +383,6 @@
 2026-10-profile-nitro-upsell-refresh	host
 2026-10-profile-read-state	bundle,host
 2026-10-recurring-referral-reminder	bundle,host
-2026-10-remove-quests-from-discovery	host
 2026-10-request-to-stream-non-games	bundle,host
 2026-10-rust-bf-deal	host
 2026-10-server-tag-upsell-on-guild-profile	bundle,host
@@ -468,6 +467,7 @@
 2026-11-subscription-management-settings-brand-refresh	host
 2026-11-three-month-nitro-gifting-no-copy-change	host
 2026-11-user-profile-mobile-editing-refresh	bundle,host
+2026-11-voice-activity-status-group	host
 2026-11-voice-dtx-forward-all	host
 2026-11-voicemod-3p	host
 2026-11-voicemod-non-sub-marketing	host

@@ -91,6 +91,7 @@ rtrb@0.4.1
 rubato@5.0.1
 rust-stemmers@1.2.0
 rustfft@6.4.1
+rustix@1.1.6
 salsa20@0.10.2
 semver@1.0.28
 serde@1.0.229

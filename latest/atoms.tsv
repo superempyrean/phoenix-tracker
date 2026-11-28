@@ -994,6 +994,7 @@
 1555	outWidth
 1568	onDisk
 1592	wanted
+1599	formatLocale
 1607	restricted
 1611	history
 1615	tombstoneCause
@@ -1047,6 +1048,7 @@
 1981	spotifyDealerUrl
 1982	large
 1998	sentLoopback
+1999	osEnabled
 2000	heightPx
 2004	has_alpha
 2012	exitDescription
@@ -1286,4 +1288,5 @@
 3516	network
 3530	top
 3533	widthPx
+3537	uploadName
 3555	launchState

@@ -22,6 +22,7 @@ wasm-app-kit
 wasm-app-onboarding
 wasm-app-platform
 wasm-app-premium
+wasm-app-private-channels
 wasm-app-profile
 wasm-app-quests
 wasm-app-safety

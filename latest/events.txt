@@ -95,12 +95,14 @@
 1448	@digitalCredential
 1476	@onDemandResource
 1552	@authSessionFinished
+1582	@drawn
 1631	@exported
 1633	@appTransaction
 1822	@pinsMeasured
 1926	@imageSize
 2204	@smsResult
 2232	@modalNavBar
+2302	@urlOpened
 2369	@soundboardAudio
 2506	@prefersCrossFade
 2507	@rtcRegionLatency

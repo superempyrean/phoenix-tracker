@@ -1,6 +1,6 @@
 # Drawable resources (name, qualifiers, type) in the base APK. Type is the root element of an XML
 # drawable, or the file's format. Source: resources.arsc and each file's binary XML. Status: extracted.
-# 594 entries, 592 names, 9 named ic_mana_*.
+# 595 entries, 593 names, 9 named ic_mana_*.
 $avd_hide_password__0	-	vector
 $avd_hide_password__1	-	objectAnimator
 $avd_hide_password__2	-	objectAnimator
@@ -123,6 +123,7 @@ abc_tab_indicator_material	-	selector
 abc_text_cursor_material	-	shape
 abc_textfield_search_material	-	selector
 abc_vector_test	-	vector
+activate_device_background	xxhdpi	jpg
 adx_ic_other_sign_in	-	vector
 adx_ic_passkey	-	vector
 appeal_check_with_stars	xxhdpi	png

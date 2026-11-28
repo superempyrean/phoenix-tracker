@@ -1,14 +1,14 @@
 # Build identity, APKs and ABIs. Status: extracted.
 package	com.discord
-version-name	357.4 - Alpha
-version-code	357204
+version-name	357.5 - Alpha
+version-code	357205
 libdiscord-version	90.0.42-dave-pairwise-fingerprint
 compile-sdk	36
-apk	base	discord-357204-base.apk	sha256:93213a30a9bdb2399832e6d7df6d6c7b4edcc6785844b43638059f7d9190005c
-apk	config.arm64_v8a	discord-357204-config.arm64_v8a.apk	sha256:86cec6de95b541410a5214ce02fd0f398ab3797f53f98f0a17e153ac3ee4a740
-apk	config.armeabi_v7a	discord-357204-config.armeabi_v7a.apk	sha256:0536706a221cec2ddac9f4ee2cd6bfd5a7cb56c8e2c8e48ada1615e0b7e17e48
-apk	config.x86	discord-357204-config.x86.apk	sha256:0e52534cce8f0d382e33e374bcfe99a9021d10e0aefe0044e50e449cc06cd89b
-apk	config.x86_64	discord-357204-config.x86_64.apk	sha256:8470912357d3ac2c73e8cf07a06ce4f3f651321537e0c9d056e05b0438fe4cdb
+apk	base	discord-357205-base.apk	sha256:4ff62b1348e689f13e13798a70c35d4d375f318c671edee32dd62fcc5a0883e5
+apk	config.arm64_v8a	discord-357205-config.arm64_v8a.apk	sha256:09a95e14e9dbe636aac282bba1e126d54e31bd4d7c55a29d83293fef67cce874
+apk	config.armeabi_v7a	discord-357205-config.armeabi_v7a.apk	sha256:1f2d3131c5b026fa8bad30aea103d1fceef56831c74993f5efbb7f67d170cf51
+apk	config.x86	discord-357205-config.x86.apk	sha256:4456a5269d5c1519f1987b92275e1acbb795ffa3734096608c0be163b30085b7
+apk	config.x86_64	discord-357205-config.x86_64.apk	sha256:196c7f31541a1bff7b26eb03320ac38e0ed7a8babed83576d33560525970b955
 hermes-bytecode-version	98
 abi	arm64-v8a	45 libs	host
 abi	armeabi-v7a	45 libs	host
